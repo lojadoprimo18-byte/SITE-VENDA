@@ -280,13 +280,15 @@
         
         <!-- Filtros de Categoria -->
         <div class="categorias">
-            <button class="btn-categoria ativo" data-categoria="todos">Todos</button>
-            <button class="btn-categoria" data-categoria="parafusos">Parafusos</button>
-            <button class="btn-categoria" data-categoria="rolamentos">Rolamentos</button>
-            <button class="btn-categoria" data-categoria="Ferramentas">Ferramentas</button>
-            <button class="btn-categoria" data-categoria="Automotivo">Automotivo</button>
-			<button class="btn-categoria" data-categoria="Cola">Colas</button>
-            <button class="btn-categoria" data-categoria="tintas">Tintas</button>
+           <!-- Filtros de Categoria -->
+        <div class="categorias">
+            <button class="btn-categoria ativo" onclick="filtrarCategoria('todos')">Todos</button>
+            <button class="btn-categoria" onclick="filtrarCategoria('Cola')">Cola</button>
+            <button class="btn-categoria" onclick="filtrarCategoria('tintas')">Tintas</button>
+            <button class="btn-categoria" onclick="filtrarCategoria('ferramentas')">Ferramentas</button>
+			<button class="btn-categoria" onclick="filtrarCategoria('Iluminação')">Iluminação</button>
+			<button class="btn-categoria" onclick="filtrarCategoria('Automotivo')">Automotivo</button>
+			<button class="btn-categoria" onclick="filtrarCategoria('Rolamentos')">Rolamentos</button>
         </div>
     </div>
 
@@ -483,4 +485,47 @@
                 </a>
             </div>
         </div>
+    <!-- Sistema de Busca e Filtro (JavaScript) -->
+    <script>
+        const inputBusca = document.getElementById('busca');
+        const produtos = document.querySelectorAll('.produto-card');
+        let categoriaAtual = 'todos';
 
+        // Função para buscar por texto
+        inputBusca.addEventListener('input', () => {
+            const termo = inputBusca.value.toLowerCase();
+            filtrarProdutos(termo, categoriaAtual);
+        });
+
+        // Função para filtrar por categoria clicada
+        function filtrarCategoria(categoria) {
+            categoriaAtual = categoria;
+            
+            // Atualiza o visual dos botões
+            document.querySelectorAll('.btn-categoria').forEach(btn => btn.classList.remove('ativo'));
+            event.target.classList.add('ativo');
+
+            const termo = inputBusca.value.toLowerCase();
+            filtrarProdutos(termo, categoria);
+        }
+
+        // Executa a filtragem combinada (Busca + Categoria)
+        function filtrarProdutos(texto, categoria) {
+            produtos.forEach(produto => {
+                const titulo = produto.querySelector('.produto-titulo').textContent.toLowerCase();
+                const catProduto = produto.getAttribute('data-categoria');
+
+                const bateTexto = titulo.includes(texto);
+                const bateCategoria = (categoria === 'todos' || catProduto === categoria);
+
+                if (bateTexto && bateCategoria) {
+                    produto.style.display = 'flex';
+                } else {
+                    produto.style.display = 'none';
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
