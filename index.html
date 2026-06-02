@@ -82,13 +82,14 @@
 
         /* Cartão do Produto */
         .produto-card {
-            background: white;
-            border-radius: 6px;
+            background: var(--surface);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
             overflow: hidden;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            transition: transform 0.2s;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
             display: flex;
             flex-direction: column;
+            box-shadow: var(--shadow);
         }
 
         .produto-card:hover {
