@@ -3,84 +3,150 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo de Produtos - WhatsApp</title>
+    <title>Loja do Primo - Catálogo Digital</title>
+    <!-- Importação de Fonte Moderna e Ícones do FontAwesome -->
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cloudflare.com">
+    
     <style>
+        /* Variáveis de Cores baseadas na Identidade Visual */
+        :root {
+            --header-gradient: linear-gradient(135deg, #071536 0%, #0d4291 100%); /* NOVO: Cabeçalho Azul Degradê */
+            --primary: #0d4291;       /* Azul Escuro Oficial */
+            --whatsapp: #25d366;      /* Verde Oficial do WhatsApp */
+            --whatsapp-hover: #20ba5a;
+            --background-gradient: linear-gradient(135deg, #757574 0%, #fdfcf7 100%); /* Fundo Amarelo Degradê */
+            --surface: #ffffff;       /* Fundo dos cartões */
+            --text-main: #0f172a;     /* Texto principal quase preto */
+            --text-muted: #64748b;    /* Texto secundário cinza */
+            --border: #e2e8f0;        /* Linhas de bordas suaves */
+            --radius: 14px;           /* Cantos arredondados */
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+        }
+
         /* Estilos Gerais */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f6f9;
+            font-family: 'Inter', sans-serif;
+            background: var(--background-gradient);
+            background-attachment: fixed;
             margin: 0;
             padding: 0;
-            color: #333;
+            color: var(--text-main);
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
         }
 
+        /* Cabeçalho Premium com Degradê Azul */
         header {
-            background-color: #01228c;
-            color: white;
+            background: var(--header-gradient);
+            border-bottom: 2px solid #0a3370;
             text-align: center;
-            padding: 15px 5px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 25px 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
 
-        h1 { margin: 0; font-size: 26px; }
-        header p { margin: 2px 0 0; font-size: 20px; opacity: 0.9; }
+        .header-logo {
+            max-width: 300px;
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
 
-        /* Área de Filtros */
+        /* Área de Filtros e Busca */
         .filtros-container {
-            max-width: 1200px;
-            margin: 20px auto 0;
+            max-width: 1100px;
+            margin: 30px auto 0;
             padding: 0 20px;
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 20px;
+        }
+
+        .busca-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .busca-wrapper i {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 16px;
         }
 
         .barra-busca {
             width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #ccc;
-            border-radius: 25px;
+            padding: 16px 16px 16px 48px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
             font-size: 16px;
+            font-family: inherit;
             box-sizing: border-box;
             outline: none;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            background-color: var(--surface);
+            transition: all 0.2s ease;
+            color: var(--text-main);
+            box-shadow: var(--shadow);
         }
 
+        .barra-busca:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(13, 66, 145, 0.2);
+        }
+
+        /* Categorias Estilizadas */
         .categorias {
             display: flex;
-            gap: 6px;
+            gap: 10px;
             overflow-x: auto;
-            padding-bottom: 5px;
+            padding-bottom: 8px;
+            scrollbar-width: none;
+        }
+
+        .categorias::-webkit-scrollbar {
+            display: none;
         }
 
         .btn-categoria {
-            background-color: white;
-            border: 1px solid #073ded;
-            color: #0d4291;
-            padding: 8px 16px;
-            border-radius: 10px;
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--primary);
+            padding: 12px 24px;
+            border-radius: 30px;
             cursor: pointer;
             font-weight: 600;
+            font-size: 14px;
             white-space: nowrap;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
+            box-shadow: var(--shadow);
         }
 
-        .btn-categoria.ativo, .btn-categoria:hover {
-            background-color: #073ded;
-            color: white;
+        .btn-categoria:hover {
+            background-color: #f8fafc;
+            border-color: var(--primary);
+        }
+
+        .btn-categoria.ativo {
+            background-color: var(--primary) !important;
+            border-color: var(--primary) !important;
+            color: white !important;
         }
 
         /* Grade de Produtos */
         .container {
-            max-width: 1200px;
-            margin: 20px auto;
+            max-width: 1100px;
+            margin: 30px auto 80px;
             padding: 0 20px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 28px;
         }
 
-        /* Cartão do Produto */
         .produto-card {
             background: var(--surface);
             border-radius: var(--radius);
@@ -93,370 +159,162 @@
         }
 
         .produto-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-6px);
+            box-shadow: 0 12px 20px -5px rgb(0 0 0 / 0.1);
+        }
+
+        .imagem-container {
+            width: 100%;
+            height: 220px;
+            background-color: var(--surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-sizing: border-box;
+            border-bottom: 1px solid var(--border);
         }
 
         .produto-imagem {
-             max-width: 100%;
+            max-width: 100%;
             max-height: 100%;
             object-fit: contain;
         }
 
         .produto-info {
-            padding: 15px;
+            padding: 20px;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
         }
 
+        .produto-categoria {
+            font-size: 11px;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: var(--text-muted);
+            letter-spacing: 0.06em;
+            margin-bottom: 6px;
+        }
+
         .produto-titulo {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
-            margin: 0 0 10px 0;
+            line-height: 1.4;
+            margin: 0 0 12px 0;
+            color: var(--text-main);
+            min-height: 42px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
         .produto-preco {
-            font-size: 18px;
-            color: #241101;
-            font-weight: bold;
-            margin-bottom: 15px;
+            font-size: 19px;
+            color: #16a34a;
+            font-weight: 700;
+            margin-bottom: 18px;
         }
 
-        /* Botão do WhatsApp */
+        .preco-sub{
+            font-size: 12px;
+            font-weight: 400;
+            color: var(--text-muted);
+        }
+
         .btn-whatsapp {
-            background-color:#073ded;
+            background-color: var(--whatsapp);
             color: white;
             text-decoration: none;
             text-align: center;
-            padding: 12px;
-            border-radius: 5px;
-            font-weight: bold;
+            padding: 13px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            transition: background 0.2s;
+            transition: background-color 0.2s ease;
+            border: none;
         }
 
         .btn-whatsapp:hover {
-            background-color: #073ded;
+            background-color: var(--whatsapp-hover);
         }
 
         /* Responsividade */
-        @media (max-width: 480px) {
-            .container { grid-template-columns: 1fr; }
+        @media (max-width: 540px) {
+            .header-logo { max-width: 200px; }
+            .container { 
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); 
+                gap: 14px;
+                padding: 0 14px;
+            }
+            .imagem-container { height: 160px; padding: 12px; }
+            .produto-info { padding: 14px; }
+            .produto-titulo { font-size: 13px; min-height: 36px; margin-bottom: 8px; }
+            .produto-preco { font-size: 16px; margin-bottom: 14px; }
+            .btn-whatsapp { padding: 11px; font-size: 12px; border-radius: 8px; }
+            .filtros-container { padding: 0 14px; margin-top: 25px; }
+            .btn-categoria { padding: 10px 18px; font-size: 13px; }
         }
     </style>
 </head>
 <body>
-<header style="background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('https://i.ibb.co/pj5tprSK/logo-contorno-branco-hd.png'); background-size: 1200px 500px; background-position: center; background-repeat: no-repeat; padding: 20px 0;">   
-  <div class="app">
-  <div class="sidebar">
-    <div class="logo" style="text-align: center; padding: 2px 0;">
 
-	      <img src="favicon.ico" 
-           alt="Logo Loja do Primo" 
-           style="width: 300px; height: 300px; object-fit: contain; display: block; margin: 0 auto 1px auto;">
-
-        <p style="color: white; font-weight: bold; text-shadow: 1px 1px 3px rgba(0,0,0,0.8);">
-          Escolha seus produtos e finalize o pedido pelo Whatsap
-			</p>
-	  
-	  </div> <!-- Fechamento da div logo -->
-    </div> <!-- Fechamento da div sidebar -->
-  </div> <!-- Fechamento da div app -->
-
-</header>
-
+    <!-- Cabeçalho com o NOVO fundo Azul Degradê Corporativo -->
+    <header>
+        <img src="logo.jpg" alt="Loja do Primo - Parafusos & Fixações" class="header-logo">
+    </header>
 
     <div class="filtros-container">
         <!-- Barra de Busca por Texto -->
-        <input type="text" id="busca" class="barra-busca" placeholder="O que você está procurando?">
+        <div class="busca-wrapper">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="busca" class="barra-busca" placeholder="O que você está procurando?">
+        </div>
         
         <!-- Filtros de Categoria -->
         <div class="categorias">
-            <button class="btn-categoria ativo" onclick="filtrarCategoria('todos')">Todos</button>
-            <button class="btn-categoria" onclick="filtrarCategoria('Cola')">Cola</button>
-            <button class="btn-categoria" onclick="filtrarCategoria('tintas')">Tintas</button>
-            <button class="btn-categoria" onclick="filtrarCategoria('ferramentas')">Ferramentas</button>
-			<button class="btn-categoria" onclick="filtrarCategoria('Iluminação')">Iluminação</button>
-			<button class="btn-categoria" onclick="filtrarCategoria('Automotivo')">Automotivo</button>
+            <button class="btn-categoria ativo" data-filter="todos">Todos</button>
+            <button class="btn-categoria" data-filter="parafusos">Parafusos</button>
+            <button class="btn-categoria" data-filter="rolamentos">Rolamentos</button>
+            <button class="btn-categoria" data-filter="Ferramentas">Ferramentas</button>
+            <button class="btn-categoria" data-filter="Cola">Colas</button>
+            <button class="btn-categoria" data-filter="tintas">Tintas</button>
         </div>
     </div>
 
+    <!-- Grade de Produtos -->
     <div class="container" id="lista-produtos">
 
-        <!-- PRODUTO 1 (Categoria: Cola) -->
-        <div class="produto-card" data-categoria="Cola">
-            <!-- Puxando imagem da pasta local chamada 'imagens' -->
-            <img width="300" height="400" src="https://cibraflex.com.br/wp-content/uploads/2025/12/BISNAGA-PU40-BRANCO-e1765313546789.png" class="attachment-medium size-medium wp-image-45754" class="produto-imagem">
-            <div class="produto-info">
-                <h3 class="produto-titulo">Cibra PU40 Fixa Tudo Branco 80g </h3>
-                <div class="produto-preco">R$ 14,90 / und</div>
-                <a href="https://web.whatsapp.com/send?phone=5531972054164&text=Loja%20do%20Primo%20como%20podemos%20ajudar" target="_blank" class="btn-whatsapp">
-                    🛒 Pedir no WhatsApp
-                </a>
+        <!-- PRODUTO: PARAFUSO SEXTAVADO -->
+        <div class="produto-card" data-categoria="Ferramentas">
+            <div class="imagem-container">
+                <img src="https://tambasa.com/imagem/produto/id/20105/width/…ndex/0?h=7c690357833247265ba356982d8aad646ce874d5" alt="Parafuso Sextavado" class="produto-imagem">
             </div>
-        </div>
-
-    <!-- PRODUTO 2 (Categoria: Cola) -->
-        <div class="produto-card" data-categoria="Cola">
-            <!-- Puxando imagem da pasta local chamada 'imagens' -->
-            <img loading="lazy" width="300" height="400"src="https://cibraflex.com.br/wp-content/uploads/2025/12/BISNAGA-PU40-CINZA-e1765313479698.png" class="attachment-full size-full wp-image-45755" class="produto-imagem">
             <div class="produto-info">
-                <h3 class="produto-titulo">Cibra PU40 Fixa Tudo Cinza 80g </h3>
-                <div class="produto-preco">R$ 14,90 / und</div>
-                <a href="https://web.whatsapp.com/send?phone=5531972054164&text=Loja%20do%20Primo%20como%20podemos%20ajudar" target="_blank" class="btn-whatsapp">
+<h3 class="produto-titulo">Chave Canhão 07X125Mm Famastil Cromo Vanádio</h3>
+                <div class="produto-preco">R$ 26,90</div>
+                <a href="https://whatsapp.com." target="_blank" class="btn-whatsapp">
                     🛒 Pedir no WhatsApp
-                </a>
-            </div>
-        </div>
+                  </a>
+                </div>
+              </div>
 
-        <!-- PRODUTO 3 (Categoria: ferramentas) -->
-        <div class="produto-card" data-categoria="ferramentas">
-           <img class="pswp__img" src="https://assets.tramontina.com.br/upload/tramon/imagens/GAR/41128108PDM001G.jpg" style="display: block; width: 280px; height: 400px;" alt="CHAVES COMBINADAS TRAMONTINA" class="produto-imagem">
+<!-- PRODUTO: PARAFUSO SEXTAVADO -->
+        <div class="produto-card" data-categoria="Ferramentas">
+            <div class="imagem-container">
+                <img src="https://tambasa.com/imagem/produto/id/16132/width/…ndex/0?h=8940de927b795b001bd198998e083cc675b3a2cb" alt="Parafuso Sextavado" class="produto-imagem">
+            </div>
             <div class="produto-info">
-                <h3 class="produto-titulo">CHAVES COMBINADAS TRAMONTINA </h3>
-                <div class="produto-preco">APARTIR R$ 12,90</div>
-                <a href="https:https://web.whatsapp.com/send?phone=5531972054164&text=Loja%20do%20Primo%20como%20podemos%20ajudar" target="_blank" class="btn-whatsapp">
+<h3 class="produto-titulo">Chave Allen 10 Peças 1,5 A 10Mm Thompson</h3>
+                <div class="produto-preco">R$ 22,90</div>
+                <a href="https://whatsapp.com." target="_blank" class="btn-whatsapp">
                     🛒 Pedir no WhatsApp
-                </a>
-            </div>
-        </div>
-
-        <!-- PRODUTO 4 (Categoria: tintas) -->
-        <div class="produto-card" data-categoria="tintas">
-            <img width="200" height="300" class="product-detail__large-image js-product-detail__large-image" src="https://tambasa.com/imagem/produto/id/23075/width/…ndex/0?h=95c4ea1e0c8cd37dec5e9880045e3771a249660f" alt="Tinta" class="produto-imagem">
-            <div class="produto-info">
-                <h3 class="produto-titulo">Tinta Spray Branco Fosco 400 Colore</h3>
-                <div class="produto-preco">R$ 19,90</div>
-                <a href="https://web.whatsapp.com/send?phone=5531972054164?text=Olá!%20Gostaria%20de%20comprar%20o%20Produto%201" target="_blank" class="btn-whatsapp">
-                    🛒 Pedir no WhatsApp
-                </a>
-            </div>
-        </div>
-
-<!-- PRODUTO 5 (Categoria: tintas) -->
-        <div class="produto-card" data-categoria="tintas">
-            <img width="300" height="400" class="product-detail__large-image js-product-detail__large-image" src="https://tambasa.com/imagem/produto/id/23080/width/…ndex/0?h=c0e500bff4b72efe50a878afc63d43500b8e16e6" alt="Tinta" class="produto-imagem">
-            <div class="produto-info">
-                <h3 class="produto-titulo">Tinta Spray Preto Fosco 400 Colore</h3>
-                <div class="produto-preco">R$ 19,90</div>
-                <a href="https://web.whatsapp.com/send?phone=5531972054164&text=Loja%20do%20Primo%20como%20podemos%20ajudar" target="_blank" class="btn-whatsapp">
-                    🛒 Pedir no WhatsApp
-                </a>
-            </div>
-        </div>
-
-<!-- PRODUTO 6 (Categoria: tintas) -->
-        <div class="produto-card" data-categoria="tintas">
-            <img width="300" height="400" class="product-detail__large-image js-product-detail__large-image" src="https://tambasa.com/imagem/produto/id/23080/width/…ndex/0?h=c0e500bff4b72efe50a878afc63d43500b8e16e6" alt="Tinta" class="produto-imagem">
-            <div class="produto-info">
-                <h3 class="produto-titulo">Tinta Spray Preto Brilhante 400 Colore</h3>
-                <div class="produto-preco">R$ 19,90</div>
-                <a href="https://web.whatsapp.com/send?phone=5531972054164&text=Loja%20do%20Primo%20como%20podemos%20ajudar" target="_blank" class="btn-whatsapp">
-                    🛒 Pedir no WhatsApp
-                </a>
-            </div>
-        </div>
-
-<!-- PRODUTO 7 (Categoria: tintas) -->
-        <div class="produto-card" data-categoria="tintas">
-            <img width="300" height="400" class="product-detail__large-image js-product-detail__large-image" src="https://tambasa.com/imagem/produto/id/23075/width/…ndex/0?h=95c4ea1e0c8cd37dec5e9880045e3771a249660f" alt="Tinta" class="produto-imagem">
-            <div class="produto-info">
-                <h3 class="produto-titulo">Tinta Spray Branco Brilhante 400 Colore</h3>
-                <div class="produto-preco">R$ 19,90</div>
-                <a href="https:https://web.whatsapp.com/send?phone=5531972054164&text=Loja%20do%20Primo%20como%20podemos%20ajudar" target="_blank" class="btn-whatsapp">
-                    🛒 Pedir no WhatsApp
-                </a>
-            </div>
-        </div>
-
-   <!-- PRODUTO 8 (Categoria: Cola) -->
-        <div class="produto-card" data-categoria="Cola">
-            <!-- Puxando imagem da pasta local chamada 'imagens' -->
-            <img width="300" height="400" src="https://tambasa.com/imagem/produto/id/29138/width/…ndex/0?h=2bbdc7c3837d1ebdafc1463247c6891eb2c1e5f5" class="attachment-medium size-medium wp-image-45754" class="produto-imagem">
-            <div class="produto-info">
-                <h3 class="produto-titulo">Cola Instantânea 20G Tekbond 793 </h3>
-                <div class="produto-preco">R$ 13,90 / und</div>
-                <a href="https://web.whatsapp.com/send?phone=5531972054164&text=Loja%20do%20Primo%20como%20podemos%20ajudar" target="_blank" class="btn-whatsapp">
-                    🛒 Pedir no WhatsApp
-                </a>
-            </div>
-        </div>
-
-<!-- PRODUTO 8 (Categoria: Cola) -->
-        <div class="produto-card" data-categoria="Cola">
-            <!-- Puxando imagem da pasta local chamada 'imagens' -->
-            <img width="300" height="400" src="https://tambasa.com/imagem/produto/id/11698/width/…ndex/0?h=8ca271dfe20fb4a54441a9a1c760841ca7a38b69" class="attachment-medium size-medium wp-image-45754" class="produto-imagem">
-            <div class="produto-info">
-                <h3 class="produto-titulo">Cola Instantânea 20G Almasuper Precisão </h3>
-                <div class="produto-preco">R$ 9,90 / und</div>
-                <a href="https://web.whatsapp.com/send?phone=5531972054164&text=Loja%20do%20Primo%20como%20podemos%20ajudar" target="_blank" class="btn-whatsapp">
-                    🛒 Pedir no WhatsApp
-                </a>
-            </div>
-        </div>
-<!-- PRODUTO 8 (Categoria: Cola) -->
-        <div class="produto-card" data-categoria="Cola">
-            <!-- Puxando imagem da pasta local chamada 'imagens' -->
-            <img width="300" height="400" src="	https://tambasa.com/imagem/produto/id/11767/width/…ndex/0?h=b6996ac54257808a13c97418dfac7a20106a9556" class="attachment-medium size-medium wp-image-45754" class="produto-imagem">
-            <div class="produto-info">
-                <h3 class="produto-titulo">Cola Pvc 175G C/Pincel Firmex </h3>
-                <div class="produto-preco">R$ 19,99 / und</div>
-                <a href="https://web.whatsapp.com/send?phone=5531972054164&text=Loja%20do%20Primo%20como%20podemos%20ajudar" target="_blank" class="btn-whatsapp">
-                    🛒 Pedir no WhatsApp
-                </a>
-            </div>
-        </div>
-
-<!-- PRODUTO 8 (Categoria: Cola) -->
-        <div class="produto-card" data-categoria="Cola">
-            <!-- Puxando imagem da pasta local chamada 'imagens' -->
-            <img width="300" height="400" src="https://tambasa.com/imagem/produto/id/11736/width/…ndex/0?h=1156c494f4779db6bcf98cfb17b27af4830b6680" class="attachment-medium size-medium wp-image-45754" class="produto-imagem">
-            <div class="produto-info">
-                <h3 class="produto-titulo">Cola Pvc 175G Firmex Extra Forte </h3>
-                <div class="produto-preco">R$ 25,99 / und</div>
-                <a href="https://web.whatsapp.com/send?phone=5531972054164&text=Loja%20do%20Primo%20como%20podemos%20ajudar" target="_blank" class="btn-whatsapp">
-                    🛒 Pedir no WhatsApp
-                </a>
-            </div>
-        </div>
-
-		
-<!-- PRODUTO 10 (Categoria: Iluminação) -->
-        <div class="produto-card" data-categoria="Iluminação">
-            <!-- Puxando imagem da pasta local chamada 'imagens' -->
-            <img width="300" height="400" src="https://tambasa.com/imagem/produto/id/16462/width/…alize/?h=a7f7ac10793dc91bffb7d3a1c93ce81f8f2028f7" class="attachment-medium size-medium wp-image-45754" class="produto-imagem">
-            <div class="produto-info">
-                <h3 class="produto-titulo">Lâmpada Led 9W 6500K Foxlux </h3>
-                <div class="produto-preco">R$ 5,90 / und</div>
-                <a href="https://web.whatsapp.com/send?phone=5531972054164&text=Loja%20do%20Primo%20como%20podemos%20ajudar" target="_blank" class="btn-whatsapp">
-                    🛒 Pedir no WhatsApp
-                </a>
-            </div>
-        </div>
-
-<!-- PRODUTO 11 (Categoria: Iluminação) -->
-        <div class="produto-card" data-categoria="Iluminação">
-            <!-- Puxando imagem da pasta local chamada 'imagens' -->
-            <img width="300" height="400" src="https://tambasa.com/imagem/produto/id/16427/width/…alize/?h=130b53f0a443551952f55c0953daa8291b0c12fb" class="attachment-medium size-medium wp-image-45754" class="produto-imagem">
-            <div class="produto-info">
-                <h3 class="produto-titulo">Lâmpada Led 9,0W 6500K Elgin </h3>
-                <div class="produto-preco">R$ 4,90 / und</div>
-                <a href="https://web.whatsapp.com/send?phone=5531972054164&text=Loja%20do%20Primo%20como%20podemos%20ajudar" target="_blank" class="btn-whatsapp">
-                    🛒 Pedir no WhatsApp
-                </a>
-            </div>
-        </div>
-
-<!-- PRODUTO 12 (Categoria: Iluminação) -->
-        <div class="produto-card" data-categoria="Iluminação">
-            <!-- Puxando imagem da pasta local chamada 'imagens' -->
-            <img width="300" height="400" src="	https://tambasa.com/imagem/produto/id/47732/width/…ndex/0?h=0b4bc417a29e3b47c726d82ffaf3b7a5a2f43455" class="attachment-medium size-medium wp-image-45754" class="produto-imagem">
-            <div class="produto-info">
-                <h3 class="produto-titulo">Painel Led Avant Alumínio Quadrado Sobrepor - 3K, 12W, 15cm, 720 Lúmens </h3>
-                <div class="produto-preco">R$ 19,90 / und</div>
-                <a href="https://web.whatsapp.com/send?phone=5531972054164&text=Loja%20do%20Primo%20como%20podemos%20ajudar" target="_blank" class="btn-whatsapp">
-                    🛒 Pedir no WhatsApp
-                </a>
-            </div>
-        </div>
-
-		<!-- PRODUTO 13 (Categoria: Iluminação) -->
-        <div class="produto-card" data-categoria="Iluminação">
-            <!-- Puxando imagem da pasta local chamada 'imagens' -->
-            <img width="300" height="400" src="https://tambasa.com/imagem/produto/id/47732/width/…ndex/0?h=0b4bc417a29e3b47c726d82ffaf3b7a5a2f43455" class="attachment-medium size-medium wp-image-45754" class="produto-imagem">
-            <div class="produto-info">
-                <h3 class="produto-titulo">Painel Led Avant Alumínio Quadrado Sobrepor - 3K, 18W, 19cm, 1260 Lúmens </h3>
-                <div class="produto-preco">R$ 29,90 / und</div>
-                <a href="https://web.whatsapp.com/send?phone=5531972054164&text=Loja%20do%20Primo%20como%20podemos%20ajudar" target="_blank" class="btn-whatsapp">
-                    🛒 Pedir no WhatsApp
-                </a>
-            </div>
-        </div>
-<!-- PRODUTO 13 (Categoria: Automotivo) -->
-        <div class="produto-card" data-categoria="Automotivo">
-            <!-- Puxando imagem da pasta local chamada 'imagens' -->
-            <img width="300" height="400" src="https://tambasa.com/imagem/produto/id/12309/width/…alize/?h=6a6bc4181aa3785fe838e049d044881c6b7a874e" class="attachment-medium size-medium wp-image-45754" class="produto-imagem">
-            <div class="produto-info">
-                <h3 class="produto-titulo">Desengripante Spray 300Ml Lub Fast </h3>
-                <div class="produto-preco">R$ 9,90 / und</div>
-                <a href="https://web.whatsapp.com/send?phone=5531972054164&text=Loja%20do%20Primo%20como%20podemos%20ajudar" target="_blank" class="btn-whatsapp">
-                    🛒 Pedir no WhatsApp
-                </a>
-            </div>
-        </div>
-<!-- PRODUTO 14 (Categoria: Automotivo) -->
-        <div class="produto-card" data-categoria="Automotivo">
-            <!-- Puxando imagem da pasta local chamada 'imagens' -->
-            <img width="300" height="400" src="	https://tambasa.com/imagem/produto/id/16371/width/…ndex/0?h=f60cc99cd553b518eb60274a3099d0da35d19f23" class="attachment-medium size-medium wp-image-45754" class="produto-imagem">
-            <div class="produto-info">
-                <h3 class="produto-titulo">Graxa Spray M500 Branca 200Ml </h3>
-                <div class="produto-preco">R$ 21,90 / und</div>
-                <a href="https://web.whatsapp.com/send?phone=5531972054164&text=Loja%20do%20Primo%20como%20podemos%20ajudar" target="_blank" class="btn-whatsapp">
-                    🛒 Pedir no WhatsApp
-                </a>
-            </div>
-        </div>
-<!-- PRODUTO 15 (Categoria: Automotivo) -->
-        <div class="produto-card" data-categoria="Automotivo">
-            <!-- Puxando imagem da pasta local chamada 'imagens' -->
-            <img width="300" height="400" src="	https://tambasa.com/imagem/produto/id/24039/width/…ndex/0?h=de1e1c12175c75e11230c526ed23f6c842222fb1" class="attachment-medium size-medium wp-image-45754" class="produto-imagem">
-            <div class="produto-info">
-                <h3 class="produto-titulo">Limpa Contato 300Ml/200G M500 </h3>
-                <div class="produto-preco">R$ 19,9 / und</div>
-                <a href="https://web.whatsapp.com/send?phone=5531972054164&text=Loja%20do%20Primo%20como%20podemos%20ajudar" target="_blank" class="btn-whatsapp">
-                    🛒 Pedir no WhatsApp
-                </a>
-            </div>
-        </div>
-
-		
-    </div>
-
-    <!-- Sistema de Busca e Filtro (JavaScript) -->
-    <script>
-        const inputBusca = document.getElementById('busca');
-        const produtos = document.querySelectorAll('.produto-card');
-        let categoriaAtual = 'todos';
-
-        // Função para buscar por texto
-        inputBusca.addEventListener('input', () => {
-            const termo = inputBusca.value.toLowerCase();
-            filtrarProdutos(termo, categoriaAtual);
-        });
-
-        // Função para filtrar por categoria clicada
-        function filtrarCategoria(categoria) {
-            categoriaAtual = categoria;
-            
-            // Atualiza o visual dos botões
-            document.querySelectorAll('.btn-categoria').forEach(btn => btn.classList.remove('ativo'));
-            event.target.classList.add('ativo');
-
-            const termo = inputBusca.value.toLowerCase();
-            filtrarProdutos(termo, categoria);
-        }
-
-        // Executa a filtragem combinada (Busca + Categoria)
-        function filtrarProdutos(texto, categoria) {
-            produtos.forEach(produto => {
-                const titulo = produto.querySelector('.produto-titulo').textContent.toLowerCase();
-                const catProduto = produto.getAttribute('data-categoria');
-
-                const bateTexto = titulo.includes(texto);
-                const bateCategoria = (categoria === 'todos' || catProduto === categoria);
-
-                if (bateTexto && bateCategoria) {
-                    produto.style.display = 'flex';
-                } else {
-                    produto.style.display = 'none';
-                }
-            });
-        }
-    </script>
-
-</body>
-</html>
+                  </a>
+                </div>
+              </div>
