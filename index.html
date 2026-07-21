@@ -43,18 +43,21 @@ body {
 }
 
 		/* 1. Torna todo o bloco superior fixo e cria o fundo escuro/azul para a busca */
+/* 1. Controla o tamanho máximo de todo o bloco fixo na tela */
 .topo-fixo {
     position: fixed;
     top: 0;
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%); /* Garante que o bloco fique perfeitamente centralizado */
     width: 100%;
+    max-width: 1200px; /* Altere este valor para menos (ex: 1000px) se quiser ainda menor */
     z-index: 1000;
-    background-color: #0c1a30; /* Use a cor predominante do seu site/banner para o fundo da busca */
+    background-color: #0c1a30; 
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    padding-bottom: 15px; /* Espaço elegante abaixo da barra de busca */
+    padding-bottom: 15px; 
 }
 
-/* 2. Mantém o banner preenchendo o topo corretamente */
+/* 2. Remove restrições extras do banner para ele respeitar o tamanho do contêiner pai */
 .banner-container {
     width: 100%;
     overflow: hidden;
@@ -85,11 +88,10 @@ body {
 .produto-preco-container {
     margin-bottom: 15px;
 }
-
-/* 4. EVITA QUE OS PRODUTOS FIQUEM ESCONDIDOS (MUITO IMPORTANTE) */
-/* Adicione esta regra ao contêiner onde ficam listados os seus produtos (geralmente uma div ou main) */
+		
+/* 4. AJUSTE IMPORTANTE: Reduz a margem dos produtos para acompanhar o banner menor */
 main, .produtos-container { 
-    margin-top: 36vw; /* Empurra os produtos para baixo da barra fixa */
+    margin-top: 400px; /* Mudamos de 'vw' para 'px' fixos para estabilizar o layout após encolher o topo */
 }
 
 		.produto-preco-container {
