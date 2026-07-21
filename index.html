@@ -50,7 +50,7 @@ body {
     left: 50%;
     transform: translateX(-50%); /* Garante que o bloco fique perfeitamente centralizado */
     width: 100%;
-    max-width: 1200px; /* Altere este valor para menos (ex: 1000px) se quiser ainda menor */
+    max-width: 800px; /* Altere este valor para menos (ex: 1000px) se quiser ainda menor */
     z-index: 1000;
     background-color: #0c1a30; 
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
@@ -60,7 +60,9 @@ body {
 /* 2. Remove restrições extras do banner para ele respeitar o tamanho do contêiner pai */
 .banner-container {
     width: 100%;
+	max-width: 800px
     overflow: hidden;
+	margin: 0 auto;
 }
 
 .banner-principal {
