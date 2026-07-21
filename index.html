@@ -42,22 +42,19 @@ body {
     min-height: 100vh;
 }
 
-        /* Cabeçalho Premium com Degradê Azul */
-        header {
-            background: var(--header-gradient);
-            border-bottom: 2px solid #0a3370;
-            text-align: center;
-            padding: 25px 20px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        }
+		/* Adicione este código para o novo banner: */
+.banner-container {
+    width: 100%;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Mantém uma sombra elegante sob o banner */
+}
 
-        .header-logo {
-            max-width: 300px;
-            width: 100%;
-            height: auto;
-            display: block;
-            margin: 0 auto;
-        }
+.banner-principal {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
 
         /* Área de Filtros e Busca */
         .filtros-container {
@@ -303,17 +300,19 @@ body {
 </head>
 <body>
 
-    <!-- Cabeçalho com o NOVO fundo Azul Degradê Corporativo -->
-    <header>
-        <img src="https://i.ibb.co/jZbbDPBc/logo.png" alt="Loja do Primo - Parafusos & Fixações" class="header-logo">
-    </header>
+  <!-- Banner Principal (Loja do Primo) -->
+<div class="banner-container">
+    <img src="https://i.ibb.co/20Bc4hG3/banner-loja-do-primo-v2.png" alt="Banner Loja do Primo" class="banner-principal">
+</div>
 
-  <<div class="filtros-container">
-        <!-- Barra de Busca por Texto -->
-        <div class="busca-wrapper">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" id="busca" class="barra-busca" placeholder="O que você está procurando?">
-        </div>
+<div class="filtros-container">
+    <!-- Barra de Busca por Texto -->
+    <div class="busca-wrapper">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="busca" class="barra-busca" placeholder="O que você está procurando?">
+    </div> 
+</div>
+
         
         
         <!-- Filtros de Categoria -->
