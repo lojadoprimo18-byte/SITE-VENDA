@@ -50,7 +50,7 @@ body {
     left: 50%;
     transform: translateX(-50%); /* Garante que o bloco fique perfeitamente centralizado */
     width: 100%;
-    max-width: 1100px; /* Altere este valor para menos (ex: 1000px) se quiser ainda menor */
+    max-width: 1200px; /* Altere este valor para menos (ex: 1000px) se quiser ainda menor */
     z-index: 1000;
     background-color: #0c1a30; 
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
@@ -90,9 +90,44 @@ body {
     margin-bottom: 15px;
 }
 		
-/* 4. AJUSTE IMPORTANTE: Reduz a margem dos produtos para acompanhar o banner menor */
+/* 1. Controla a largura total da seção de produtos para alinhar com o banner */
 main, .produtos-container { 
-    margin-top: 270px; /* Mudamos de 'vw' para 'px' fixos para estabilizar o layout após encolher o topo */
+    max-width: 1200px !important; /* Mesma largura máxima que demos ao topo-fixo */
+    margin: 270px auto 0 !important; /* Mantém o topo afastado e centraliza o bloco na tela */
+    padding: 0 20px !important;
+    box-sizing: border-box;
+}
+
+/* 2. Configura a grade para exibir vários produtos por linha de forma organizada */
+/* OBS: Ajuste o nome da classe abaixo se o seu contêiner de grade tiver outro nome (ex: .grid-produtos) */
+.produtos-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)) !important; /* Cria colunas automáticas de tamanho ideal */
+    gap: 20px !important; /* Espaçamento idêntico entre os cards */
+    width: 100% !important;
+}
+
+/* 3. Controla o tamanho individual de cada card de produto */
+/* OBS: Ajuste o nome da classe abaixo para o nome real do seu card (ex: .card-produto, .produto-item) */
+.produto-card {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100% !important; /* Mantém todos os cards com a mesma altura */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* 4. Evita que as imagens dos produtos estourem e fiquem gigantes */
+.produto-card img {
+    max-width: 100% !important;
+    height: 180px !important; /* Define uma altura limite padrão para todas as fotos de produtos */
+    object-fit: contain !important; /* Garante que o produto não fique esticado ou amassado */
+    margin: 0 auto 10px;
+    display: block;
 }
 
 		.produto-preco-container {
