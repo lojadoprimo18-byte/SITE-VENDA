@@ -42,36 +42,55 @@ body {
     min-height: 100vh;
 }
 
-		/* Adicione este código para o novo banner: */
+		/* 1. Torna todo o bloco superior fixo e cria o fundo escuro/azul para a busca */
+.topo-fixo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: #0c1a30; /* Use a cor predominante do seu site/banner para o fundo da busca */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    padding-bottom: 15px; /* Espaço elegante abaixo da barra de busca */
+}
+
+/* 2. Mantém o banner preenchendo o topo corretamente */
 .banner-container {
     width: 100%;
-    max-width: 100%;
     overflow: hidden;
 }
 
 .banner-principal {
     width: 100%;
-    height: auto; /* Impede que a imagem seja esticada verticalmente */
+    height: auto;
     display: block;
-    object-fit: contain; /* Garante que a imagem mantenha a proporção original */
+    object-fit: contain;
 }
 
+/* 3. Atualização dos seus Filtros (Ajustado para o topo fixo) */
+.filtros-container {
+    max-width: 1100px;
+    margin: 15px auto 0; /* Diminuído de 30px para 15px para economizar espaço fixo */
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
 
+.busca-wrapper {
+    position: relative;
+    width: 100%;
+}
 
-        /* Área de Filtros e Busca */
-        .filtros-container {
-            max-width: 1100px;
-            margin: 30px auto 0;
-            padding: 0 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
+.produto-preco-container {
+    margin-bottom: 15px;
+}
 
-        .busca-wrapper {
-            position: relative;
-            width: 100%;
-        }
+/* 4. EVITA QUE OS PRODUTOS FIQUEM ESCONDIDOS (MUITO IMPORTANTE) */
+/* Adicione esta regra ao contêiner onde ficam listados os seus produtos (geralmente uma div ou main) */
+main, .produtos-container { 
+    margin-top: 36vw; /* Empurra os produtos para baixo da barra fixa */
+}
 
 		.produto-preco-container {
     margin-bottom: 15px; /* Espaço antes do botão do WhatsApp */
@@ -303,20 +322,19 @@ body {
 <body>
 
   <!-- Banner Principal (Loja do Primo) -->
+	<div class="topo-fixo">
 <div class="banner-container">
     <img src="https://i.ibb.co/4gZKG0Dw/banner-loja-do-primo-slogan.png" alt="Banner Loja do Primo" class="banner-principal">
 </div>
-
-<div class="filtros-container">
-    <!-- Barra de Busca por Texto -->
-    <div class="busca-wrapper">
-        <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="text" id="busca" class="barra-busca" placeholder="O que você está procurando?">
-    </div> 
+		 <div class="filtros-container">
+        <!-- Barra de Busca por Texto -->
+        <div class="busca-wrapper">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="busca" class="barra-busca" placeholder="O que você está procurando?">
+        </div> 
+    </div>
 </div>
-
-        
-        
+       
         <!-- Filtros de Categoria -->
         <div class="categorias">
            <!-- Filtros de Categoria -->
