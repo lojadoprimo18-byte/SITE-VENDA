@@ -50,7 +50,7 @@ body {
     left: 50%;
     transform: translateX(-50%); /* Garante que o bloco fique perfeitamente centralizado */
     width: 100%;
-    max-width: 900px; /* Altere este valor para menos (ex: 1000px) se quiser ainda menor */
+    max-width: 1100px; /* Altere este valor para menos (ex: 1000px) se quiser ainda menor */
     z-index: 1000;
     background-color: #0c1a30; 
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
@@ -60,21 +60,20 @@ body {
 /* 2. Remove restrições extras do banner para ele respeitar o tamanho do contêiner pai */
 .banner-container {
     width: 100%;
-	max-width: 900px
-    overflow: hidden;
-	margin: 0 auto;
-}
+	overflow: hidden;
+	}
 
 .banner-principal {
-    width: 100%;
-    height: auto;
-    display: block;
-    object-fit: contain;
+    width: 100% !important;
+    height: 180px !important; /* Defina aqui a altura máxima desejada (ex: 150px, 180px, 200px) */
+    display: block !important;
+    object-fit: cover !important; /* Corta o excesso de altura sem amassar ou distorcer a imagem */
+    object-position: center left; /* Mantém o foco no logo e na chamada principal do lado esquerdo */
 }
 
 /* 3. Atualização dos seus Filtros (Ajustado para o topo fixo) */
 .filtros-container {
-    max-width: 900px;
+    max-width: 1100px;
     margin: 15px auto 0; /* Diminuído de 30px para 15px para economizar espaço fixo */
     padding: 0 20px;
     display: flex;
@@ -93,7 +92,7 @@ body {
 		
 /* 4. AJUSTE IMPORTANTE: Reduz a margem dos produtos para acompanhar o banner menor */
 main, .produtos-container { 
-    margin-top: 320px; /* Mudamos de 'vw' para 'px' fixos para estabilizar o layout após encolher o topo */
+    margin-top: 270px; /* Mudamos de 'vw' para 'px' fixos para estabilizar o layout após encolher o topo */
 }
 
 		.produto-preco-container {
