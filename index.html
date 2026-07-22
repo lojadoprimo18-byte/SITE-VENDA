@@ -4,215 +4,184 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Loja do Primo - Catálogo Digital</title>
-    <!-- Importação de Fonte Moderna e Ícones do FontAwesome -->
-    <link rel="preconnect" href="https://googleapis.com">
-    <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cloudflare.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     
     <style>
-        /* Variáveis de Cores baseadas na Identidade Visual */
-        :root {
-            --header-gradient: linear-gradient(135deg, #071536 0%, #0d4291 100%); /* NOVO: Cabeçalho Azul Degradê */
-            --primary: #0d4291;       /* Azul Escuro Oficial */
-            --whatsapp: #25d366;      /* Verde Oficial do WhatsApp */
-            --whatsapp-hover: #20ba5a;
-            --background-gradient: linear-gradient(135deg, #757574 0%, #fdfcf7 100%); /* Fundo Amarelo Degradê */
-            --surface: #ffffff;       /* Fundo dos cartões */
-            --text-main: #0f172a;     /* Texto principal quase preto */
-            --text-muted: #64748b;    /* Texto secundário cinza */
-            --border: #e2e8f0;        /* Linhas de bordas suaves */
-            --radius: 14px;           /* Cantos arredondados */
-            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        /* Estilos Gerais */
-body {
-    font-family: 'Inter', sans-serif;
-    /* Link direto para a imagem de ferramentas */
-    background-image: url('https://i.ibb.co/gLFCsxFY/Chat-GPT-Image-22-de-abr-de-2026-16-22-02.png'); 
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    margin: 0;
-    padding: 0;
-    color: var(--text-main);
-    -webkit-font-smoothing: antialiased;
-    min-height: 100vh;
-}
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f0f2f5;
+            min-height: 100vh;
+            padding-top: 0;
+        }
 
-		/* 1. Torna todo o bloco superior fixo e cria o fundo escuro/azul para a busca */
-/* 1. Controla o tamanho máximo de todo o bloco fixo na tela */
-.topo-fixo {
-    position: fixed;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%); /* Garante que o bloco fique perfeitamente centralizado */
-    width: 100%;
-    max-width:auto; /* Altere este valor para menos (ex: 1000px) se quiser ainda menor */
-    z-index: 1000;
-    background-color: #0c1a30; 
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    padding-bottom: 15px; 
-}
+        /* ============================================
+           CABEÇALHO FIXO - ESTILO LIMPO E MODERNO
+           ============================================ */
+        .header-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: #ffffff;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+        }
 
-/* 2. Remove restrições extras do banner para ele respeitar o tamanho do contêiner pai */
-.banner-container {
-    width: 100%;
-	overflow: hidden;
-	}
+        /* Banner Superior */
+        .banner-topo {
+            width: 100%;
+            height: 190px;
+            background: #0b3472;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
 
-.banner-principal {
-    width: 100% !important;
-    height: 180px !important; /* Defina aqui a altura máxima desejada (ex: 150px, 180px, 200px) */
-    display: block !important;
-    object-fit: cover !important; /* Corta o excesso de altura sem amassar ou distorcer a imagem */
-    object-position: center left; /* Mantém o foco no logo e na chamada principal do lado esquerdo */
-}
+        .banner-topo img {
+            width: 100%;
+            height: 100%;
+            object-fit: fill;
+        }
 
-/* 3. Atualização dos seus Filtros (Ajustado para o topo fixo) */
-.filtros-container {
-    max-width: 1100px;
-    margin: 15px auto 0; /* Diminuído de 30px para 15px para economizar espaço fixo */
-    padding: 0 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
+        /* Conteúdo do Cabeçalho */
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            background: #ffffff;
+        }
 
-.busca-wrapper {
-    position: relative;
-    width: 100%;
-}
+        /* Logo */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-shrink: 0;
+        }
 
-.produto-preco-container {
-    margin-bottom: 15px;
-}
-		
-/* 1. Alinha e centraliza o bloco principal de produtos com o banner */
-main, .produtos-container { 
-    max-width: 1200px !important; 
-    margin: 270px auto 0 !important; /* Espaço para não sumir sob o topo fixo */
-    padding: 0 20px !important;
-    box-sizing: border-box;
-}
+        .logo-container img {
+            height: 40px;
+            width: auto;
+            object-fit: contain;
+        }
 
-/* 2. Força os cards a ficarem lado a lado em colunas organizadas */
-/* IMPORTANTE: Caso não tenha essa classe englobando todos os cards, verifique qual tag (ex: <main> ou <div>) segura os produtos e aplique nela */
-main, .produtos-grid {
-    display: grid !important;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)) !important; /* Ajusta o número de colunas conforme o tamanho da tela */
-    gap: 20px !important; /* Espaçamento entre os produtos */
-    width: 100% !important;
-}
+        .logo-texto {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
 
-/* 3. Ajusta o tamanho e visual do Card Individual */
-.produto-card {
-    background: #fff;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    padding: 15px;
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: space-between !important;
-    height: 100% !important; 
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    box-sizing: border-box;
-}
+        .logo-texto .nome {
+            font-size: 16px;
+            font-weight: 800;
+            color: #0b3472;
+            letter-spacing: -0.5px;
+        }
 
-/* 4. Controla a área da imagem para que ela não estoure na tela */
-.imagem-container {
-    width: 100% !important;
-    height: 180px !important; /* Limita a altura máxima da área da foto */
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    background-color: #fff;
-    margin-bottom: 15px;
-    overflow: hidden;
-}
+        .logo-texto .slogan {
+            font-size: 10px;
+            font-weight: 500;
+            color: #666;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
 
-/* 5. Deixa a foto do produto proporcional e nítida */
-.produto-imagem {
-    max-width: 100% !important;
-    max-height: 100% !important;
-    width: auto !important;
-    height: auto !important;
-    object-fit: contain !important; /* Impede que o produto fique esticado ou amassado */
-    display: block;
-}
-
-		.produto-preco-container {
-    margin-bottom: 15px; /* Espaço antes do botão do WhatsApp */
-}
-
-.preco-antigo {
-    color: #888;
-    text-decoration: line-through; /* Risca o preço antigo */
-    font-size: 0.9em;
-    display: block;
-}
-
-.produto-preco-novo {
-    color: #d32f2f; /* Vermelho chamativo para o preço novo */
-    font-size: 1.3em;
-    font-weight: bold;
-    margin: 4px 0;
-}
-
-.produto-preco-novo small {
-    font-size: 0.7em;
-    color: #666;
-    font-weight: normal;
-}
-
-.badge-desconto {
-    background-color: #2e7d32; /* Verde para destacar a economia */
-    color: #fff;
-    font-size: 0.8em;
-    font-weight: bold;
-    padding: 2px 6px;
-    border-radius: 4px;
-    display: inline-block;
-}
+        /* Barra de Busca */
+        .busca-wrapper {
+            position: relative;
+            flex: 1;
+            max-width: 450px;
+        }
 
         .busca-wrapper i {
             position: absolute;
-            left: 18px;
+            left: 14px;
             top: 50%;
             transform: translateY(-50%);
-            color: var(--text-muted);
-            font-size: 16px;
+            color: #999;
+            font-size: 14px;
         }
 
         .barra-busca {
             width: 100%;
-            padding: 16px 16px 16px 48px;
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            font-size: 16px;
-            font-family: inherit;
-            box-sizing: border-box;
+            padding: 8px 15px 8px 40px;
+            border: 2px solid #e8ecf0;
+            border-radius: 10px;
+            font-size: 13px;
             outline: none;
-            background-color: var(--surface);
-            transition: all 0.2s ease;
-            color: var(--text-main);
-            box-shadow: var(--shadow);
+            background: #f8f9fa;
+            color: #333;
+            transition: all 0.3s ease;
         }
 
         .barra-busca:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(13, 66, 145, 0.2);
+            border-color: #0b3472;
+            background: #ffffff;
+            box-shadow: 0 0 0 4px rgba(11, 52, 114, 0.1);
         }
 
-        /* Categorias Estilizadas */
-        .categorias {
+        .barra-busca::placeholder {
+            color: #aaa;
+        }
+
+        /* Contato WhatsApp */
+        .contato-whatsapp {
             display: flex;
-            gap: 10px;
+            align-items: center;
+            gap: 8px;
+            background: #25d366;
+            color: #fff;
+            padding: 7px 16px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 13px;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+            white-space: nowrap;
+        }
+
+        .contato-whatsapp:hover {
+            background: #1ebe5a;
+            transform: scale(1.02);
+        }
+
+        .contato-whatsapp i {
+            font-size: 16px;
+        }
+
+        /* ============================================
+           CATEGORIAS (ABAIXO DO CABEÇALHO)
+           ============================================ */
+        .categorias-container {
+            background: #ffffff;
+            border-top: 1px solid #f0f2f5;
+            padding: 6px 20px;
             overflow-x: auto;
-            padding-bottom: 8px;
+        }
+
+        .categorias {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 6px;
+            overflow-x: auto;
             scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
         }
 
         .categorias::-webkit-scrollbar {
@@ -220,615 +189,783 @@ main, .produtos-grid {
         }
 
         .btn-categoria {
-            background-color: var(--surface);
-            border: 1px solid var(--border);
-            color: var(--primary);
-            padding: 12px 24px;
-            border-radius: 30px;
+            background: transparent;
+            border: none;
+            color: #555;
+            padding: 8px 18px;
+            border-radius: 20px;
             cursor: pointer;
-            font-weight: 600;
-            font-size: 14px;
+            font-weight: 500;
+            font-size: 13px;
             white-space: nowrap;
             transition: all 0.2s ease;
-            box-shadow: var(--shadow);
+            flex-shrink: 0;
         }
 
         .btn-categoria:hover {
-            background-color: #f8fafc;
-            border-color: var(--primary);
+            background: #f0f2f5;
+            color: #0b3472;
         }
 
         .btn-categoria.ativo {
-            background-color: var(--primary) !important;
-            border-color: var(--primary) !important;
-            color: white !important;
+            background: #0b3472;
+            color: #ffffff;
+            font-weight: 600;
         }
 
-        /* Grade de Produtos */
+        /* ============================================
+           GRADE DE PRODUTOS
+           ============================================ */
         .container {
-            max-width: 1100px;
-            margin: 30px auto 80px;
+            max-width: 1200px;
+            margin: 240px auto 50px;
             padding: 0 20px;
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 28px;
+            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+            gap: 10px;
+        }
+
+        .produto-card {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+            border: 1px solid #f0f2f5;
         }
 
         .produto-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 12px 20px -5px rgb(0 0 0 / 0.1);
-        }
-		
-        .produto-info {
-            padding: 20px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            border-color: #dce0e5;
         }
 
-        .produto-categoria {
-            font-size: 11px;
-            text-transform: uppercase;
-            font-weight: 700;
-            color: var(--text-muted);
-            letter-spacing: 0.06em;
-            margin-bottom: 6px;
+        .imagem-container {
+            width: 100%;
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fafbfc;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            overflow: hidden;
+        }
+
+        .produto-imagem {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .produto-info {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            gap: 8px;
         }
 
         .produto-titulo {
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 600;
             line-height: 1.4;
-            margin: 0 0 12px 0;
-            color: var(--text-main);
-            min-height: 42px;
+            color: #1a1a2e;
+            min-height: 40px;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
 
-        .produto-preco {
-            font-size: 19px;
-            color: #16a34a;
-            font-weight: 700;
-            margin-bottom: 18px;
+        .produto-preco-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
         }
 
-        .preco-sub{
-            font-size: 12px;
+        .preco-antigo {
+            color: #999;
+            text-decoration: line-through;
+            font-size: 13px;
+        }
+
+        .produto-preco {
+            font-size: 20px;
+            font-weight: 700;
+            color: #16a34a;
+        }
+
+        .produto-preco small {
+            font-size: 13px;
             font-weight: 400;
-            color: var(--text-muted);
+            color: #666;
+        }
+
+        .badge-desconto {
+            background: #dc2626;
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 10px;
+            border-radius: 4px;
+            display: inline-block;
+            align-self: flex-start;
         }
 
         .btn-whatsapp {
-            background-color: var(--whatsapp);
-            color: white;
+            background: #25d366;
+            color: #fff;
             text-decoration: none;
             text-align: center;
-            padding: 13px;
-            border-radius: 10px;
+            padding: 10px 12px;
+            border-radius: 8px;
             font-weight: 600;
-            font-size: 14px;
+            font-size: 13px;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            transition: background-color 0.2s ease;
+            transition: all 0.2s ease;
+            margin-top: auto;
             border: none;
+            cursor: pointer;
         }
 
         .btn-whatsapp:hover {
-            background-color: var(--whatsapp-hover);
+            background: #1ebe5a;
+            transform: scale(1.02);
         }
 
-        /* Responsividade */
-        @media (max-width: 540px) {
-            .header-logo { max-width: 200px; }
-            .container { 
-                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); 
-                gap: 14px;
-                padding: 0 14px;
+        .mensagem-vazio {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+            display: none;
+        }
+
+        .mensagem-vazio i {
+            font-size: 48px;
+            color: #ddd;
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        /* ============================================
+           RESPONSIVIDADE
+           ============================================ */
+        @media (max-width: 1024px) {
+            .container {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             }
-            .imagem-container { height: 160px; padding: 12px; }
-            .produto-info { padding: 14px; }
-            .produto-titulo { font-size: 13px; min-height: 36px; margin-bottom: 8px; }
-            .produto-preco { font-size: 16px; margin-bottom: 14px; }
-            .btn-whatsapp { padding: 11px; font-size: 12px; border-radius: 8px; }
-            .filtros-container { padding: 0 14px; margin-top: 25px; }
-            .btn-categoria { padding: 10px 18px; font-size: 13px; }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-wrap: wrap;
+                padding: 10px 16px;
+                gap: 10px;
+            }
+
+            .logo-container img {
+                height: 35px;
+            }
+
+            .logo-texto .nome {
+                font-size: 15px;
+            }
+
+            .logo-texto .slogan {
+                font-size: 10px;
+            }
+
+            .busca-wrapper {
+                order: 3;
+                flex-basis: 100%;
+                max-width: 100%;
+            }
+
+            .contato-whatsapp {
+                padding: 6px 14px;
+                font-size: 12px;
+            }
+
+            .contato-whatsapp i {
+                font-size: 15px;
+            }
+
+            .banner-topo {
+                height: 80px;
+            }
+
+            .container {
+                margin-top: 170px;
+                padding: 0 12px;
+                gap: 12px;
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            }
+
+            .categorias-container {
+                padding: 6px 12px;
+            }
+
+            .btn-categoria {
+                font-size: 12px;
+                padding: 6px 14px;
+            }
+
+            .imagem-container {
+                height: 140px;
+            }
+
+            .produto-titulo {
+                font-size: 13px;
+                min-height: 34px;
+            }
+
+            .produto-preco {
+                font-size: 17px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                gap: 10px;
+                margin-top: 160px;
+            }
+
+            .produto-card {
+                padding: 12px;
+            }
+
+            .imagem-container {
+                height: 120px;
+            }
+
+            .produto-titulo {
+                font-size: 12px;
+                min-height: 30px;
+            }
+
+            .produto-preco {
+                font-size: 15px;
+            }
+
+            .btn-whatsapp {
+                font-size: 11px;
+                padding: 8px 10px;
+            }
         }
     </style>
 </head>
 <body>
 
-  <!-- Banner Principal (Loja do Primo) -->
-	<div class="topo-fixo">
-<div class="banner-container">
-    <img src="https://i.ibb.co/4gZKG0Dw/banner-loja-do-primo-slogan.png" alt="Banner Loja do Primo" class="banner-principal">
-</div>
-		 <div class="filtros-container">
-        <!-- Barra de Busca por Texto -->
-        <div class="busca-wrapper">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" id="busca" class="barra-busca" placeholder="O que você está procurando?">
+    <!-- ==========================================
+    CABEÇALHO FIXO
+    ========================================== -->
+    <div class="header-container">
         
-        <!-- Filtros de Categoria -->
-        <div class="categorias">
-           <!-- Filtros de Categoria -->
-        <div class="categorias">
-            <button class="btn-categoria ativo" onclick="filtrarCategoria('todos')">Todos</button>
-            <button class="btn-categoria" onclick="filtrarCategoria('Cola')">Cola</button>
-            <button class="btn-categoria" onclick="filtrarCategoria('Tintas')">Tintas</button>
-            <button class="btn-categoria" onclick="filtrarCategoria('Ferramentas')">Ferramentas</button>
-			<button class="btn-categoria" onclick="filtrarCategoria('Iluminação')">Iluminação</button>
-			<button class="btn-categoria" onclick="filtrarCategoria('Automotivo')">Automotivo</button>
-			<button class="btn-categoria" onclick="filtrarCategoria('Rolamentos')">Rolamentos</button>
-			<button class="btn-categoria" onclick="filtrarCategoria('Parafusos')">Parafusos</button>
-        </div>
-    </div>
-       </div> 
-    </div>
-</div>
-    <!-- Grade de Produtos -->
-    <div class="container" id="lista-produtos">
-
-        <!-- PRODUTO: PARAFUSO SEXTAVADO -->
-<!-- PRODUTO 14 (Categoria: Automotivo) -->
-<div class="produto-card" data-categoria="Automotivo">
-    <!-- Puxando imagem da pasta local chamada 'imagens' -->
-    <img src="https://tambasa.com/imagem/produto/id/16371/width/…ndex/0?h=f60cc99cd553b518eb60274a3099d0da35d19f23" alt="Parafuso Sextavado" class="produto-imagem">
-    <div class="produto-info">
-        <h3 class="produto-titulo">Graxa Spray M500 Branca 200Ml </h3>
-        
-        <!-- Bloco de Preço Promocional -->
-        <div class="produto-preco-container">
-            <span class="preco-antigo">De: R$ 21,90</span>
-            <div class="produto-preco-novo">Por: R$ 19,90 <small>/ und</small></div>
-            <span class="badge-desconto">10% OFF</span>
+        <!-- Banner Superior -->
+        <div class="banner-topo">
+            <img src="https://i.postimg.cc/nzWJ8HN0/image-9d6ef2d3.png" 
+                 alt="Loja do Primo - Qualidade em Parafusos e Fixações"
+                 onerror="this.style.display='none'">
         </div>
 
-        <a href="https://web.whatsapp.com/send?phone=5531972054164&text=Loja%20do%20Primo%20como%20podemos%20ajudar" target="_blank" class="btn-whatsapp">
-            🛒 Pedir no WhatsApp
-        </a>
-    </div>
-</div>
-
-<!-- PRODUTO 7 (Categoria: tintas) -->
-        <div class="produto-card" data-categoria="Automotivo">
-            <img src="https://tambasa.com/imagem/produto/id/18656/width/…ndex/0?h=f9de6e7b0b71b48b647d78d2d9b058c5ed6ddc6a" alt="Tinta" class="produto-imagem">
-            <div class="produto-info">
-                <h3 class="produto-titulo">Descarbonizante Spray 300Ml Car 80 </h3>
-				 <!-- Bloco de Preço Promocional -->
-        <div class="produto-preco-container">
-            <span class="preco-antigo">De: R$ 46,90</span>
-            <div class="produto-preco-novo">Por: R$ 42,90 <small>/ und</small></div>
-            <span class="badge-desconto">10% OFF</span>
-        </div>
-                <a href="https:https://web.whatsapp.com/send?phone=5531972054164&text=Loja%20do%20Primo%20como%20podemos%20ajudar" target="_blank" class="btn-whatsapp">
-                    🛒 Pedir no WhatsApp
-                </a>
-            </div>
-        </div>
-		
-		<div class="produto-card" data-categoria="Parafusos">
-            <div class="imagem-container">
-                <img src="	https://tambasa.com/imagem/produto/id/10028/width/…ndex/0?h=4a709b31c4fc9546e9249309949c0dd491a7033f" alt="Parafuso Sextavado" class="produto-imagem">
-            </div>
-            <div class="produto-info">
-<h3 class="produto-titulo">Parafuso Chipboard </h3>
-                <div class="produto-preco">Apartir R$ 0,10</div>
-                <a href="https://wa.link/9mp8z2" target="_blank" class="btn-whatsapp">
-                    🛒 Pedir no WhatsApp
-                  </a>
-                </div>
-              </div>
-
-			<div class="produto-card" data-categoria="Parafusos">
-            <div class="imagem-container">
-                <img src="https://tambasa.com/imagem/produto/id/32822/width/…ndex/0?h=e8c998579d8470179ef3851281e7f36d90272be4" alt="Parafuso Sextavado" class="produto-imagem">
-            </div>
-            <div class="produto-info">
-<h3 class="produto-titulo">Parafuso Rosca Soberba </h3>
-                <div class="produto-preco">Apartir R$ 0,35</div>
-                <a href="https://wa.link/9mp8z2" target="_blank" class="btn-whatsapp">
-                    🛒 Pedir no WhatsApp
-                  </a>
-                </div>
-              </div>
-		
-		<div class="produto-card" data-categoria="Parafusos">
-            <div class="imagem-container">
-                <img src="https://storage.googleapis.com/fotos-prd/Parafuso%…1583513476209Parafuso_Sextavado_RI_MM_88_EN_1.jpg" alt="Parafuso Sextavado" class="produto-imagem">
-            </div>
-            <div class="produto-info">
-<h3 class="produto-titulo">Parafuso Sextavado 8.8 </h3>
-                <div class="produto-preco">Apartir R$ 0,50</div>
-                <a href="https://wa.link/9mp8z2" target="_blank" class="btn-whatsapp">
-                    🛒 Pedir no WhatsApp
-                  </a>
-                </div>
-              </div>
-		
-		<div class="produto-card" data-categoria="Parafusos">
-            <div class="imagem-container">
-                <img src="https://storage.googleapis.com/fotos-prd/Parafuso%20CCMMLG/1587565664812PARAFUSO_CC_MM_LG_1.jpg" alt="Parafuso Sextavado" class="produto-imagem">
-            </div>
-            <div class="produto-info">
-<h3 class="produto-titulo">Parafuso Sextavado interno </h3>
-                <div class="produto-preco">Apartir R$ 0,60</div>
-                <a href="https://wa.link/9mp8z2" target="_blank" class="btn-whatsapp">
-                    🛒 Pedir no WhatsApp
-                  </a>
-                </div>
-              </div>
-		
-		<div class="produto-card" data-categoria="Ferramentas">
-            <div class="imagem-container">
-                <img src="https://tambasa.com/imagem/produto/id/20105/width/…ndex/0?h=7c690357833247265ba356982d8aad646ce874d5" alt="Parafuso Sextavado" class="produto-imagem">
-            </div>
-            <div class="produto-info">
-<h3 class="produto-titulo">Chave Canhão 07X125Mm Famastil Cromo Vanádio</h3>
-                <div class="produto-preco">R$ 26,90</div>
-                <a href="https://wa.link/9mp8z2" target="_blank" class="btn-whatsapp">
-                    🛒 Pedir no WhatsApp
-                  </a>
-                </div>
-              </div>
-
-<!-- PRODUTO: PARAFUSO SEXTAVADO -->
-        <div class="produto-card" data-categoria="Ferramentas">
-            <div class="imagem-container">
-                <img src="https://tambasa.com/imagem/produto/id/16132/width/…ndex/0?h=8940de927b795b001bd198998e083cc675b3a2cb" alt="Parafuso Sextavado" class="produto-imagem">
-            </div>
-            <div class="produto-info">
-<h3 class="produto-titulo">Chave Allen 10 Peças 1,5 A 10Mm Thompson</h3>
-                <div class="produto-preco">R$ 22,90</div>
-                 <a href="https://wa.link/9mp8z2" target="_blank" class="btn-whatsapp">
-                    🛒 Pedir no WhatsApp
-                  </a>
-                </div>
-              </div>
-         <!-- PRODUTO 1 (Categoria: Cola) -->
-        <div class="produto-card" data-categoria="Cola">
-            <!-- Puxando imagem da pasta local chamada 'imagens' -->
-            <img src="https://tambasa.com/imagem/produto/id/49965/width/…ndex/0?h=06f1afbd19bcf4cdfa69f7bf66bdcb9460030f79" alt="Parafuso Sextavado" class="produto-imagem">
-            <div class="produto-info">
-                <h3 class="produto-titulo">Cibra PU40 Fixa Tudo Branco 80g </h3>
-                <div class="produto-preco">R$ 14,90 / und</div>
-                <a href="https://wa.link/9mp8z2" target="_blank" class="btn-whatsapp">
-                    🛒 Pedir no WhatsApp
-                </a>
-            </div>
-        </div>
-<!-- PRODUTO 2 (Categoria: Cola) -->
-        <div class="produto-card" data-categoria="Cola">
-            <!-- Puxando imagem da pasta local chamada 'imagens' -->
-            <img src="https://tambasa.com/imagem/produto/id/49963/width/…ndex/0?h=9d8f894bf4cc316ddb031b4926e2e641c55bdf98" alt="Parafuso Sextavado" class="produto-imagem">
-            <div class="produto-info">
-                <h3 class="produto-titulo">Cibra PU40 Fixa Tudo Cinza 80g </h3>
-                <div class="produto-preco">R$ 14,90 / und</div>
-                <a href="https://web.whatsapp.com/send?phone=5531972054164&text=Loja%20do%20Primo%20como%20podemos%20ajudar" target="_blank" class="btn-whatsapp">
-                    🛒 Pedir no WhatsApp
-                </a>
-            </div>
-        </div>
-        <!-- PRODUTO 8 (Categoria: Cola) -->
-        <div class="produto-card" data-categoria="Cola">
-            <!-- Puxando imagem da pasta local chamada 'imagens' -->
-            <img src="https://tambasa.com/imagem/produto/id/29138/width/…ndex/0?h=2bbdc7c3837d1ebdafc1463247c6891eb2c1e5f5" alt="Parafuso Sextavado" class="produto-imagem">
-            <div class="produto-info">
-                <h3 class="produto-titulo">Cola Instantânea 20G Tekbond 793 </h3>
-                <div class="produto-preco">R$ 13,90 / und</div>
-                <a href="https://web.whatsapp.com/send?phone=5531972054164&text=Loja%20do%20Primo%20como%20podemos%20ajudar" target="_blank" class="btn-whatsapp">
-                    🛒 Pedir no WhatsApp
-                </a>
-            </div>
-        </div>
-
-<!-- PRODUTO 8 (Categoria: Cola) -->
-        <div class="produto-card" data-categoria="Cola">
-            <!-- Puxando imagem da pasta local chamada 'imagens' -->
-            <img src="https://tambasa.com/imagem/produto/id/11698/width/…ndex/0?h=8ca271dfe20fb4a54441a9a1c760841ca7a38b69" class="attachment-medium size-medium wp-image-45754" class="produto-imagem">
-            <div class="produto-info">
-                <h3 class="produto-titulo">Cola Instantânea 20G Almasuper Precisão </h3>
-                <div class="produto-preco">R$ 9,90 / und</div>
-                <a href="https://web.whatsapp.com/send?phone=5531972054164&text=Loja%20do%20Primo%20como%20podemos%20ajudar" target="_blank" class="btn-whatsapp">
-                    🛒 Pedir no WhatsApp
-                </a>
-            </div>
-        </div>
-<!-- PRODUTO 8 (Categoria: Cola) -->
-        <div class="produto-card" data-categoria="Cola">
-            <!-- Puxando imagem da pasta local chamada 'imagens' -->
-            <img src="	https://tambasa.com/imagem/produto/id/11767/width/…ndex/0?h=b6996ac54257808a13c97418dfac7a20106a9556" alt="Parafuso Sextavado" class="produto-imagem">
-            <div class="produto-info">
-                <h3 class="produto-titulo">Cola Pvc 175G C/Pincel Firmex </h3>
-                <div class="produto-preco">R$ 19,99 / und</div>
-                <a href="https://web.whatsapp.com/send?phone=5531972054164&text=Loja%20do%20Primo%20como%20podemos%20ajudar" target="_blank" class="btn-whatsapp">
-                    🛒 Pedir no WhatsApp
-                </a>
-            </div>
-        </div>
-
-<!-- PRODUTO 8 (Categoria: Cola) -->
-        <div class="produto-card" data-categoria="Cola">
-            <!-- Puxando imagem da pasta local chamada 'imagens' -->
-            <img src="https://tambasa.com/imagem/produto/id/11736/width/…ndex/0?h=1156c494f4779db6bcf98cfb17b27af4830b6680" alt="Parafuso Sextavado" class="produto-imagem">
-            <div class="produto-info">
-                <h3 class="produto-titulo">Cola Pvc 175G Firmex Extra Forte </h3>
-                <div class="produto-preco">R$ 25,99 / und</div>
-                <a href="https://web.whatsapp.com/send?phone=5531972054164&text=Loja%20do%20Primo%20como%20podemos%20ajudar" target="_blank" class="btn-whatsapp">
-                    🛒 Pedir no WhatsApp
-                </a>
-            </div>
-        </div>
-
-		
-<!-- PRODUTO 10 (Categoria: Iluminação) -->
-        <div class="produto-card" data-categoria="Iluminação">
-            <!-- Puxando imagem da pasta local chamada 'imagens' -->
-            <img src="https://tambasa.com/imagem/produto/id/16462/width/…alize/?h=a7f7ac10793dc91bffb7d3a1c93ce81f8f2028f7" alt="Parafuso Sextavado" class="produto-imagem">
-            <div class="produto-info">
-                <h3 class="produto-titulo">Lâmpada Led 9W 6500K Foxlux </h3>
-                <div class="produto-preco">R$ 5,90 / und</div>
-                <a href="https://web.whatsapp.com/send?phone=5531972054164&text=Loja%20do%20Primo%20como%20podemos%20ajudar" target="_blank" class="btn-whatsapp">
-                    🛒 Pedir no WhatsApp
-                </a>
-            </div>
-        </div>
-
-<!-- PRODUTO 11 (Categoria: Iluminação) -->
-        <div class="produto-card" data-categoria="Iluminação">
-            <!-- Puxando imagem da pasta local chamada 'imagens' -->
-            <img src="https://tambasa.com/imagem/produto/id/16427/width/…alize/?h=130b53f0a443551952f55c0953daa8291b0c12fb" alt="Parafuso Sextavado" class="produto-imagem">
-            <div class="produto-info">
-                <h3 class="produto-titulo">Lâmpada Led 9W 6500K Elgin </h3>
-                <div class="produto-preco">R$ 4,90 / und</div>
-                <a href="https://web.whatsapp.com/send?phone=5531972054164&text=Loja%20do%20Primo%20como%20podemos%20ajudar" target="_blank" class="btn-whatsapp">
-                    🛒 Pedir no WhatsApp
-                </a>
-            </div>
-        </div>
-
-<!-- PRODUTO 12 (Categoria: Iluminação) -->
-        <div class="produto-card" data-categoria="Iluminação">
-            <!-- Puxando imagem da pasta local chamada 'imagens' -->
-            <img src="	https://tambasa.com/imagem/produto/id/47732/width/…ndex/0?h=0b4bc417a29e3b47c726d82ffaf3b7a5a2f43455" alt="Parafuso Sextavado" class="produto-imagem">
-            <div class="produto-info">
-                <h3 class="produto-titulo">Painel Led Avant Alumínio Quadrado Sobrepor - 3K, 12W, 15cm, 720 Lúmens </h3>
-                <div class="produto-preco">R$ 19,90 / und</div>
-                <a href="https://web.whatsapp.com/send?phone=5531972054164&text=Loja%20do%20Primo%20como%20podemos%20ajudar" target="_blank" class="btn-whatsapp">
-                    🛒 Pedir no WhatsApp
-                </a>
-            </div>
-        </div>
-
-		<!-- PRODUTO 13 (Categoria: Iluminação) -->
-        <div class="produto-card" data-categoria="Iluminação">
-            <!-- Puxando imagem da pasta local chamada 'imagens' -->
-            <img src="https://tambasa.com/imagem/produto/id/47732/width/…ndex/0?h=0b4bc417a29e3b47c726d82ffaf3b7a5a2f43455" alt="Parafuso Sextavado" class="produto-imagem">
-            <div class="produto-info">
-                <h3 class="produto-titulo">Painel Led Avant Alumínio Quadrado Sobrepor - 3K, 18W, 19cm, 1260 Lúmens </h3>
-                <div class="produto-preco">R$ 29,90 / und</div>
-                <a href="https://web.whatsapp.com/send?phone=5531972054164&text=Loja%20do%20Primo%20como%20podemos%20ajudar" target="_blank" class="btn-whatsapp">
-                    🛒 Pedir no WhatsApp
-                </a>
-            </div>
-        </div>
-<!-- PRODUTO 13 (Categoria: Automotivo) -->
-        <div class="produto-card" data-categoria="Automotivo">
-            <!-- Puxando imagem da pasta local chamada 'imagens' -->
-            <img src="https://tambasa.com/imagem/produto/id/12309/width/…alize/?h=6a6bc4181aa3785fe838e049d044881c6b7a874e" alt="Parafuso Sextavado" class="produto-imagem">
-            <div class="produto-info">
-                <h3 class="produto-titulo">Desengripante Spray 300Ml Lub Fast </h3>
-                <div class="produto-preco">R$ 9,90 / und</div>
-                <a href="https://web.whatsapp.com/send?phone=5531972054164&text=Loja%20do%20Primo%20como%20podemos%20ajudar" target="_blank" class="btn-whatsapp">
-                    🛒 Pedir no WhatsApp
-                </a>
-            </div>
-        </div>
-
-
-<!-- PRODUTO 15 (Categoria: Automotivo) -->
-        <div class="produto-card" data-categoria="Automotivo">
-            <!-- Puxando imagem da pasta local chamada 'imagens' -->
-            <img  src="https://tambasa.com/imagem/produto/id/24039/width/…ndex/0?h=de1e1c12175c75e11230c526ed23f6c842222fb1" alt="Parafuso Sextavado" class="produto-imagem">
-            <div class="produto-info">
-                <h3 class="produto-titulo">Limpa Contato 300Ml/200G M500 </h3>
-                <div class="produto-preco">R$ 19,9 / und</div>
-                <a href="https://web.whatsapp.com/send?phone=5531972054164&text=Loja%20do%20Primo%20como%20podemos%20ajudar" target="_blank" class="btn-whatsapp">
-                    🛒 Pedir no WhatsApp
-                </a>
-            </div>
-        </div>
-
-		<!-- PRODUTO 15 (Categoria: Automotivo) -->
-        <div class="produto-card" data-categoria="Automotivo">
-            <!-- Puxando imagem da pasta local chamada 'imagens' -->
-            <img  src="https://http2.mlstatic.com/D_Q_NP_833076-MLB49953193364_052022-F.webp" alt="Parafuso Sextavado" class="produto-imagem">
-            <div class="produto-info">
-                <h3 class="produto-titulo">Parafuso M5x16 Protetor De Caçamba </h3>
-                <div class="produto-preco">R$ 3,20 / und</div>
-                <a href="https://web.whatsapp.com/send?phone=5531972054164&text=Loja%20do%20Primo%20como%20podemos%20ajudar" target="_blank" class="btn-whatsapp">
-                    🛒 Pedir no WhatsApp
-                </a>
-            </div>
-        </div>
-		        <!-- PRODUTO 3 (Categoria: ferramentas) -->
-        <div class="produto-card" data-categoria="Ferramentas">
-           <img src="	https://imgprd.martinsatacado.com.br/catalogoimg/117922/01_117922_01.jpg?v=210520263437&ims=1000x" alt="Parafuso Sextavado" class="produto-imagem">
-            <div class="produto-info">
-                <h3 class="produto-titulo">CHAVES COMBINADAS TRAMONTINA </h3>
-                <div class="produto-preco">APARTIR R$ 12,90</div>
-                <a href="https:https://web.whatsapp.com/send?phone=5531972054164&text=Loja%20do%20Primo%20como%20podemos%20ajudar" target="_blank" class="btn-whatsapp">
-                    🛒 Pedir no WhatsApp
-                </a>
-            </div>
-        </div>
-
-        <!-- PRODUTO 4 (Categoria: tintas) -->
-        <div class="produto-card" data-categoria="Tintas">
-            <img src="https://tambasa.com/imagem/produto/id/24183/width/…ndex/0?h=cb4abdf811baaceff11490e48470dc164de1698b" alt="Tinta" class="produto-imagem">
-            <div class="produto-info">
-                <h3 class="produto-titulo">Graxa Lubrificante Cálcio 90G Marrom Dimec</h3>
-                <div class="produto-preco">R$ 14,90</div>
-                <a href="https://web.whatsapp.com/send?phone=5531972054164?text=Olá!%20Gostaria%20de%20comprar%20o%20Produto%201" target="_blank" class="btn-whatsapp">
-                    🛒 Pedir no WhatsApp
-                </a>
-            </div>
-        </div>
-
-<!-- PRODUTO 5 (Categoria: Automotivo) -->
-        <div class="produto-card" data-categoria="Automotivo">
-            <img src="	https://tambasa.com/imagem/produto/id/28697/width/…ndex/0?h=035d616bbcbdb1563642cedc7404dbd2db8699c0" alt="Parafuso Sextavado" class="produto-imagem">
-            <div class="produto-info">
-                <h3 class="produto-titulo">Trava Rosca 10G Loctite 2760 Torque Alto</h3>
-                <div class="produto-preco">R$ 36,90</div>
-                <a href="https://web.whatsapp.com/send?phone=5531972054164&text=Loja%20do%20Primo%20como%20podemos%20ajudar" target="_blank" class="btn-whatsapp">
-                    🛒 Pedir no WhatsApp
-                </a>
-            </div>
-        </div>
-
-<!-- PRODUTO 6 (Categoria: Automotivo) -->
-        <div class="produto-card" data-categoria="Automotivo">
-            <img src="https://tambasa.com/imagem/produto/id/23080/width/…ndex/0?h=c0e500bff4b72efe50a878afc63d43500b8e16e6" alt="Tinta" class="produto-imagem">
-            <div class="produto-info">
-                <h3 class="produto-titulo">Tinta Spray Preto Brilhante 400 Colore</h3>
-                <div class="produto-preco">R$ 19,90</div>
-                <a href="https://web.whatsapp.com/send?phone=5531972054164&text=Loja%20do%20Primo%20como%20podemos%20ajudar" target="_blank" class="btn-whatsapp">
-                    🛒 Pedir no WhatsApp
-                </a>
-            </div>
-        </div>
-
-<!-- PRODUTO 7 (Categoria: tintas) -->
-        <div class="produto-card" data-categoria="Tintas">
-            <img src="https://tambasa.com/imagem/produto/id/23075/width/…ndex/0?h=95c4ea1e0c8cd37dec5e9880045e3771a249660f" alt="Tinta" class="produto-imagem">
-            <div class="produto-info">
-                <h3 class="produto-titulo">Tinta Spray Branco Brilhante 400 Colore</h3>
-                <div class="produto-preco">R$ 19,90</div>
-                <a href="https:https://web.whatsapp.com/send?phone=5531972054164&text=Loja%20do%20Primo%20como%20podemos%20ajudar" target="_blank" class="btn-whatsapp">
-                    🛒 Pedir no WhatsApp
-                </a>
-            </div>
-        </div>
-
-<!-- PRODUTO 7 (Categoria: tintas) -->
-        <div class="produto-card" data-categoria="Rolamentos">
-            <img src="https://http2.mlstatic.com/D_Q_NP_735814-MLB71408766326_092023-F.webp" alt="Tinta" class="produto-imagem">
-            <div class="produto-info">
-                <h3 class="produto-titulo">Rolamentos FAG</h3>
-                <div class="produto-preco">Apartir R$ 14,90</div>
-                <a href="https:https://web.whatsapp.com/send?phone=5531972054164&text=Loja%20do%20Primo%20como%20podemos%20ajudar" target="_blank" class="btn-whatsapp">
-                    🛒 Pedir no WhatsApp
-                </a>
-            </div>
-        </div>
-
-		<!-- PRODUTO 7 (Categoria: tintas) -->
-        <div class="produto-card" data-categoria="Rolamentos">
-            <img src="	https://http2.mlstatic.com/D_Q_NP_916584-MLB110892749556_052026-F.webp" alt="Tinta" class="produto-imagem">
-            <div class="produto-info">
-                <h3 class="produto-titulo">Rolamentos TIMKEN </h3>
-                <div class="produto-preco">Aparti R$ 19,90</div>
-                <a href="https:https://web.whatsapp.com/send?phone=5531972054164&text=Loja%20do%20Primo%20como%20podemos%20ajudar" target="_blank" class="btn-whatsapp">
-                    🛒 Pedir no WhatsApp
-                </a>
-            </div>
-        </div>
-
-				<!-- PRODUTO 7 (Categoria: tintas) -->
-        <div class="produto-card" data-categoria="Ferramentas">
-            <img src="	https://www.dismatal.com.br/estatico/dismatal/temp/330_5364214000.jpg" alt="Tinta" class="produto-imagem">
-            <div class="produto-info">
-                <h3 class="produto-titulo">Jogo de Macho VONDER </h3>
-                <div class="produto-preco">Aparti R$ 49,90</div>
-                <a href="https:https://web.whatsapp.com/send?phone=5531972054164&text=Loja%20do%20Primo%20como%20podemos%20ajudar" target="_blank" class="btn-whatsapp">
-                    🛒 Pedir no WhatsApp
-                </a>
-            </div>
-        </div>
-
-			<!-- PRODUTO 7 (Categoria: tintas) -->
-        <div class="produto-card" data-categoria="Ferramentas">
-            <img src="	https://www.dismatal.com.br/estatico/dismatal/temp/330_5304026000.jpg" alt="Tinta" class="produto-imagem">
-            <div class="produto-info">
-                <h3 class="produto-titulo">Broca chata para dobradiça 26,0 mm VONDER </h3>
-                <div class="produto-preco">R$ 25,90</div>
-                <a href="https:https://web.whatsapp.com/send?phone=5531972054164&text=Loja%20do%20Primo%20como%20podemos%20ajudar" target="_blank" class="btn-whatsapp">
-                    🛒 Pedir no WhatsApp
-                </a>
-            </div>
-        </div>
-
-			<!-- PRODUTO 7 (Categoria: tintas) -->
-        <div class="produto-card" data-categoria="Ferramentas">
-            <img src="	https://www.dismatal.com.br/estatico/dismatal/temp/330_5304035000.jpg" alt="Tinta" class="produto-imagem">
-            <div class="produto-info">
-                <h3 class="produto-titulo">Broca chata para dobradiça 35,0 mm VONDER </h3>
-                <div class="produto-preco">R$ 25,90</div>
-                <a href="https:https://web.whatsapp.com/send?phone=5531972054164&text=Loja%20do%20Primo%20como%20podemos%20ajudar" target="_blank" class="btn-whatsapp">
-                    🛒 Pedir no WhatsApp
-                </a>
-            </div>
-        </div>
-
-		<!-- PRODUTO 7 (Categoria: tintas) -->
-        <div class="produto-card" data-categoria="Automotivo">
-            <img src="https://www.dismatal.com.br/estatico/dismatal/temp/330_1641242010.jpg" alt="Tinta" class="produto-imagem">
-            <div class="produto-info">
-                <h3 class="produto-titulo">Adesivo trava rosca, automotivo 242 com 10 g, auto lock 1, LOCTITE </h3>
-                <div class="produto-preco">R$ 79,90</div>
-                <a href="https:https://web.whatsapp.com/send?phone=5531972054164&text=Loja%20do%20Primo%20como%20podemos%20ajudar" target="_blank" class="btn-whatsapp">
-                    🛒 Pedir no WhatsApp
-                </a>
-            </div>
-        </div>
-
-		
-    <!-- Sistema de Busca e Filtro (JavaScript) -->
-    <script>
-        const inputBusca = document.getElementById('busca');
-        const produtos = document.querySelectorAll('.produto-card');
-        let categoriaAtual = 'todos';
-
-        // Função para buscar por texto
-        inputBusca.addEventListener('input', () => {
-            const termo = inputBusca.value.toLowerCase();
-            filtrarProdutos(termo, categoriaAtual);
-        });
-
-        // Função para filtrar por categoria clicada
-        function filtrarCategoria(categoria) {
-            categoriaAtual = categoria;
+        <!-- Conteúdo do Cabeçalho -->
+        <div class="header-content">
             
-            // Atualiza o visual dos botões
-            document.querySelectorAll('.btn-categoria').forEach(btn => btn.classList.remove('ativo'));
-            event.target.classList.add('ativo');
+            <!-- Logo + Nome -->
+            <div class="logo-container">
+                <img src="https://i.ibb.co/d40yqB8q/logo-perfil.png" 
+                     alt="Loja do Primo"
+                     onerror="this.style.display='none'">
+                <div class="logo-texto">
+                    <span class="nome">Loja do Primo</span>
+                    <span class="slogan">Qualidade em Parafusos &amp; Fixações</span>
+                </div>
+            </div>
 
-            const termo = inputBusca.value.toLowerCase();
-            filtrarProdutos(termo, categoria);
-        }
+            <!-- Busca -->
+            <div class="busca-wrapper">
+                <i class="fas fa-search"></i>
+                <input type="text" id="busca" class="barra-busca" placeholder="Pesquisar produto...">
+            </div>
 
-        // Executa a filtragem combinada (Busca + Categoria)
-        function filtrarProdutos(texto, categoria) {
-            produtos.forEach(produto => {
-                const titulo = produto.querySelector('.produto-titulo').textContent.toLowerCase();
-                const catProduto = produto.getAttribute('data-categoria');
+            <!-- WhatsApp -->
+            <a href="https://wa.me/5531972054164" target="_blank" class="contato-whatsapp">
+                <i class="fab fa-whatsapp"></i>
+                <span>(31) 97205-4164</span>
+            </a>
 
-                const bateTexto = titulo.includes(texto);
-                const bateCategoria = (categoria === 'todos' || catProduto === categoria);
+        </div>
 
-                if (bateTexto && bateCategoria) {
-                    produto.style.display = 'flex';
+        <!-- Categorias -->
+        <div class="categorias-container">
+            <div class="categorias">
+                <button class="btn-categoria ativo" data-categoria="todos">Todos</button>
+                <button class="btn-categoria" data-categoria="parafusos">Parafusos</button>
+                <button class="btn-categoria" data-categoria="automotivo">Automotivo</button>
+                <button class="btn-categoria" data-categoria="ferramentas">Ferramentas</button>
+                <button class="btn-categoria" data-categoria="rolamentos">Rolamentos</button>
+                <button class="btn-categoria" data-categoria="tintas">Tintas</button>
+                <button class="btn-categoria" data-categoria="iluminação">Iluminação</button>
+                <button class="btn-categoria" data-categoria="cola">Cola</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+    GRADE DE PRODUTOS
+    ========================================== -->
+    <div class="container" id="lista-produtos"></div>
+    <div class="mensagem-vazio" id="mensagem-vazio">
+        <i class="fas fa-box-open"></i>
+        <p>Nenhum produto encontrado para esta busca.</p>
+    </div>
+
+    <script>
+        // ==========================================
+        // DADOS DOS PRODUTOS
+        // ==========================================
+        const produtos = [
+            // Parafusos
+            {
+                id: 1,
+                nome: 'Parafuso Chipboard',
+                categoria: 'parafusos',
+                imagem: 'https://tambasa.com/imagem/produto/id/10028/width/200/height/200/index/0?h=4a709b31c4fc9546e9249309949c0dd491a7033f',
+                preco: 'A partir R$ 0,10',
+                precoAntigo: null,
+                desconto: null,
+                link: 'https://wa.link/9mp8z2'
+            },
+            {
+                id: 2,
+                nome: 'Parafuso Rosca Soberba',
+                categoria: 'parafusos',
+                imagem: 'https://tambasa.com/imagem/produto/id/32822/width/200/height/200/index/0?h=e8c998579d8470179ef3851281e7f36d90272be4',
+                preco: 'A partir R$ 0,35',
+                precoAntigo: null,
+                desconto: null,
+                link: 'https://wa.link/9mp8z2'
+            },
+            {
+                id: 3,
+                nome: 'Parafuso Sextavado 8.8',
+                categoria: 'parafusos',
+                imagem: 'https://storage.googleapis.com/fotos-prd/Parafuso%20Sextavado%20RI%20MM%2088%20EN/1583513476209Parafuso_Sextavado_RI_MM_88_EN_1.jpg',
+                preco: 'A partir R$ 0,50',
+                precoAntigo: null,
+                desconto: null,
+                link: 'https://wa.link/9mp8z2'
+            },
+            {
+                id: 4,
+                nome: 'Parafuso Sextavado Interno',
+                categoria: 'parafusos',
+                imagem: 'https://storage.googleapis.com/fotos-prd/Parafuso%20CCMMLG/1587565664812PARAFUSO_CC_MM_LG_1.jpg',
+                preco: 'A partir R$ 0,60',
+                precoAntigo: null,
+                desconto: null,
+                link: 'https://wa.link/9mp8z2'
+            },
+
+            // Ferramentas
+            {
+                id: 5,
+                nome: 'Chave Canhão 07X125mm Famastil',
+                categoria: 'ferramentas',
+                imagem: 'https://tambasa.com/imagem/produto/id/20105/width/200/height/200/index/0?h=7c690357833247265ba356982d8aad646ce874d5',
+                preco: 'R$ 26,90',
+                precoAntigo: null,
+                desconto: null,
+                link: 'https://wa.link/9mp8z2'
+            },
+            {
+                id: 6,
+                nome: 'Chave Allen 10 Peças Thompson',
+                categoria: 'ferramentas',
+                imagem: 'https://tambasa.com/imagem/produto/id/16132/width/200/height/200/index/0?h=8940de927b795b001bd198998e083cc675b3a2cb',
+                preco: 'R$ 22,90',
+                precoAntigo: null,
+                desconto: null,
+                link: 'https://wa.link/9mp8z2'
+            },
+            {
+                id: 7,
+                nome: 'Chaves Combinadas Tramontina',
+                categoria: 'ferramentas',
+                imagem: 'https://imgprd.martinsatacado.com.br/catalogoimg/117922/01_117922_01.jpg?v=210520263437&ims=1000x',
+                preco: 'A partir R$ 12,90',
+                precoAntigo: null,
+                desconto: null,
+                link: 'https://wa.link/9mp8z2'
+            },
+            {
+                id: 8,
+                nome: 'Jogo de Macho VONDER',
+                categoria: 'ferramentas',
+                imagem: 'https://www.dismatal.com.br/estatico/dismatal/temp/330_5364214000.jpg',
+                preco: 'A partir R$ 49,90',
+                precoAntigo: null,
+                desconto: null,
+                link: 'https://wa.link/9mp8z2'
+            },
+            {
+                id: 9,
+                nome: 'Broca Chata para Dobradiça 26mm VONDER',
+                categoria: 'ferramentas',
+                imagem: 'https://www.dismatal.com.br/estatico/dismatal/temp/330_5304026000.jpg',
+                preco: 'R$ 25,90',
+                precoAntigo: null,
+                desconto: null,
+                link: 'https://wa.link/9mp8z2'
+            },
+            {
+                id: 10,
+                nome: 'Broca Chata para Dobradiça 35mm VONDER',
+                categoria: 'ferramentas',
+                imagem: 'https://www.dismatal.com.br/estatico/dismatal/temp/330_5304035000.jpg',
+                preco: 'R$ 25,90',
+                precoAntigo: null,
+                desconto: null,
+                link: 'https://wa.link/9mp8z2'
+            },
+
+            // Cola
+            {
+                id: 11,
+                nome: 'Cibra PU40 Fixa Tudo Branco 80g',
+                categoria: 'cola',
+                imagem: 'https://tambasa.com/imagem/produto/id/49965/width/200/height/200/index/0?h=06f1afbd19bcf4cdfa69f7bf66bdcb9460030f79',
+                preco: 'R$ 14,90',
+                precoAntigo: null,
+                desconto: null,
+                link: 'https://wa.link/9mp8z2'
+            },
+            {
+                id: 12,
+                nome: 'Cibra PU40 Fixa Tudo Cinza 80g',
+                categoria: 'cola',
+                imagem: 'https://tambasa.com/imagem/produto/id/49963/width/200/height/200/index/0?h=9d8f894bf4cc316ddb031b4926e2e641c55bdf98',
+                preco: 'R$ 14,90',
+                precoAntigo: null,
+                desconto: null,
+                link: 'https://wa.link/9mp8z2'
+            },
+            {
+                id: 13,
+                nome: 'Cola Instantânea 20g Tekbond 793',
+                categoria: 'cola',
+                imagem: 'https://tambasa.com/imagem/produto/id/29138/width/200/height/200/index/0?h=2bbdc7c3837d1ebdafc1463247c6891eb2c1e5f5',
+                preco: 'R$ 13,90',
+                precoAntigo: null,
+                desconto: null,
+                link: 'https://wa.link/9mp8z2'
+            },
+            {
+                id: 14,
+                nome: 'Cola Instantânea 20g Almasuper',
+                categoria: 'cola',
+                imagem: 'https://tambasa.com/imagem/produto/id/11698/width/200/height/200/index/0?h=8ca271dfe20fb4a54441a9a1c760841ca7a38b69',
+                preco: 'R$ 9,90',
+                precoAntigo: null,
+                desconto: null,
+                link: 'https://wa.link/9mp8z2'
+            },
+            {
+                id: 15,
+                nome: 'Cola PVC 175g com Pincel Firmex',
+                categoria: 'cola',
+                imagem: 'https://tambasa.com/imagem/produto/id/11767/width/200/height/200/index/0?h=b6996ac54257808a13c97418dfac7a20106a9556',
+                preco: 'R$ 19,99',
+                precoAntigo: null,
+                desconto: null,
+                link: 'https://wa.link/9mp8z2'
+            },
+            {
+                id: 16,
+                nome: 'Cola PVC 175g Firmex Extra Forte',
+                categoria: 'cola',
+                imagem: 'https://tambasa.com/imagem/produto/id/11736/width/200/height/200/index/0?h=1156c494f4779db6bcf98cfb17b27af4830b6680',
+                preco: 'R$ 25,99',
+                precoAntigo: null,
+                desconto: null,
+                link: 'https://wa.link/9mp8z2'
+            },
+
+            // Iluminação
+            {
+                id: 17,
+                nome: 'Lâmpada LED 9W 6500K Foxlux',
+                categoria: 'iluminação',
+                imagem: 'https://tambasa.com/imagem/produto/id/16462/width/200/height/200/index/0?h=a7f7ac10793dc91bffb7d3a1c93ce81f8f2028f7',
+                preco: 'R$ 5,90',
+                precoAntigo: null,
+                desconto: null,
+                link: 'https://wa.link/9mp8z2'
+            },
+            {
+                id: 18,
+                nome: 'Lâmpada LED 9W 6500K Elgin',
+                categoria: 'iluminação',
+                imagem: 'https://tambasa.com/imagem/produto/id/16427/width/200/height/200/index/0?h=130b53f0a443551952f55c0953daa8291b0c12fb',
+                preco: 'R$ 4,90',
+                precoAntigo: null,
+                desconto: null,
+                link: 'https://wa.link/9mp8z2'
+            },
+            {
+                id: 19,
+                nome: 'Painel LED Avant Quadrado 12W',
+                categoria: 'iluminação',
+                imagem: 'https://tambasa.com/imagem/produto/id/47732/width/200/height/200/index/0?h=0b4bc417a29e3b47c726d82ffaf3b7a5a2f43455',
+                preco: 'R$ 19,90',
+                precoAntigo: null,
+                desconto: null,
+                link: 'https://wa.link/9mp8z2'
+            },
+            {
+                id: 20,
+                nome: 'Painel LED Avant Quadrado 18W',
+                categoria: 'iluminação',
+                imagem: 'https://tambasa.com/imagem/produto/id/47732/width/200/height/200/index/0?h=0b4bc417a29e3b47c726d82ffaf3b7a5a2f43455',
+                preco: 'R$ 29,90',
+                precoAntigo: null,
+                desconto: null,
+                link: 'https://wa.link/9mp8z2'
+            },
+
+            // Automotivo
+            {
+                id: 21,
+                nome: 'Graxa Spray M500 Branca 200ml',
+                categoria: 'automotivo',
+                imagem: 'https://tambasa.com/imagem/produto/id/16371/width/200/height/200/index/0?h=f60cc99cd553b518eb60274a3099d0da35d19f23',
+                preco: 'R$ 19,90',
+                precoAntigo: 'R$ 21,90',
+                desconto: '10% OFF',
+                link: 'https://wa.link/9mp8z2'
+            },
+            {
+                id: 22,
+                nome: 'Descarbonizante Spray 300ml',
+                categoria: 'automotivo',
+                imagem: 'https://tambasa.com/imagem/produto/id/18656/width/200/height/200/index/0?h=f9de6e7b0b71b48b647d78d2d9b058c5ed6ddc6a',
+                preco: 'R$ 42,90',
+                precoAntigo: 'R$ 46,90',
+                desconto: '10% OFF',
+                link: 'https://wa.link/9mp8z2'
+            },
+            {
+                id: 23,
+                nome: 'Desengripante Spray 300ml Lub Fast',
+                categoria: 'automotivo',
+                imagem: 'https://tambasa.com/imagem/produto/id/12309/width/200/height/200/index/0?h=6a6bc4181aa3785fe838e049d044881c6b7a874e',
+                preco: 'R$ 9,90',
+                precoAntigo: null,
+                desconto: null,
+                link: 'https://wa.link/9mp8z2'
+            },
+            {
+                id: 24,
+                nome: 'Limpa Contato 300ml M500',
+                categoria: 'automotivo',
+                imagem: 'https://tambasa.com/imagem/produto/id/24039/width/200/height/200/index/0?h=de1e1c12175c75e11230c526ed23f6c842222fb1',
+                preco: 'R$ 19,90',
+                precoAntigo: null,
+                desconto: null,
+                link: 'https://wa.link/9mp8z2'
+            },
+            {
+                id: 25,
+                nome: 'Parafuso M5x16 Protetor de Caçamba',
+                categoria: 'automotivo',
+                imagem: 'https://http2.mlstatic.com/D_Q_NP_833076-MLB49953193364_052022-F.webp',
+                preco: 'R$ 3,20',
+                precoAntigo: null,
+                desconto: null,
+                link: 'https://wa.link/9mp8z2'
+            },
+            {
+                id: 26,
+                nome: 'Trava Rosca 10g Loctite 2760',
+                categoria: 'automotivo',
+                imagem: 'https://tambasa.com/imagem/produto/id/28697/width/200/height/200/index/0?h=035d616bbcbdb1563642cedc7404dbd2db8699c0',
+                preco: 'R$ 36,90',
+                precoAntigo: null,
+                desconto: null,
+                link: 'https://wa.link/9mp8z2'
+            },
+            {
+                id: 27,
+                nome: 'Tinta Spray Preto Brilhante 400ml',
+                categoria: 'automotivo',
+                imagem: 'https://tambasa.com/imagem/produto/id/23080/width/200/height/200/index/0?h=c0e500bff4b72efe50a878afc63d43500b8e16e6',
+                preco: 'R$ 19,90',
+                precoAntigo: null,
+                desconto: null,
+                link: 'https://wa.link/9mp8z2'
+            },
+            {
+                id: 28,
+                nome: 'Adesivo Trava Rosca 242 LOCTITE',
+                categoria: 'automotivo',
+                imagem: 'https://www.dismatal.com.br/estatico/dismatal/temp/330_1641242010.jpg',
+                preco: 'R$ 79,90',
+                precoAntigo: null,
+                desconto: null,
+                link: 'https://wa.link/9mp8z2'
+            },
+
+            // Tintas
+            {
+                id: 29,
+                nome: 'Graxa Lubrificante Cálcio 90g',
+                categoria: 'tintas',
+                imagem: 'https://tambasa.com/imagem/produto/id/24183/width/200/height/200/index/0?h=cb4abdf811baaceff11490e48470dc164de1698b',
+                preco: 'R$ 14,90',
+                precoAntigo: null,
+                desconto: null,
+                link: 'https://wa.link/9mp8z2'
+            },
+            {
+                id: 30,
+                nome: 'Tinta Spray Branco Brilhante 400ml',
+                categoria: 'tintas',
+                imagem: 'https://tambasa.com/imagem/produto/id/23075/width/200/height/200/index/0?h=95c4ea1e0c8cd37dec5e9880045e3771a249660f',
+                preco: 'R$ 19,90',
+                precoAntigo: null,
+                desconto: null,
+                link: 'https://wa.link/9mp8z2'
+            },
+
+            // Rolamentos
+            {
+                id: 31,
+                nome: 'Rolamentos FAG',
+                categoria: 'rolamentos',
+                imagem: 'https://http2.mlstatic.com/D_Q_NP_735814-MLB71408766326_092023-F.webp',
+                preco: 'A partir R$ 14,90',
+                precoAntigo: null,
+                desconto: null,
+                link: 'https://wa.link/9mp8z2'
+            },
+            {
+                id: 32,
+                nome: 'Rolamentos TIMKEN',
+                categoria: 'rolamentos',
+                imagem: 'https://http2.mlstatic.com/D_Q_NP_916584-MLB110892749556_052026-F.webp',
+                preco: 'A partir R$ 19,90',
+                precoAntigo: null,
+                desconto: null,
+                link: 'https://wa.link/9mp8z2'
+            }
+        ];
+
+        // ==========================================
+        // FUNÇÕES
+        // ==========================================
+        const container = document.getElementById('lista-produtos');
+        const inputBusca = document.getElementById('busca');
+        const mensagemVazio = document.getElementById('mensagem-vazio');
+        let categoriaAtual = 'todos';
+        let termoBusca = '';
+
+        function renderizarProdutos(lista) {
+            container.innerHTML = '';
+
+            if (lista.length === 0) {
+                mensagemVazio.style.display = 'block';
+                return;
+            }
+
+            mensagemVazio.style.display = 'none';
+
+            lista.forEach(produto => {
+                const card = document.createElement('div');
+                card.className = 'produto-card';
+
+                let precoHTML = '';
+                if (produto.precoAntigo) {
+                    precoHTML = `
+                        <div class="produto-preco-container">
+                            <span class="preco-antigo">De: ${produto.precoAntigo}</span>
+                            <span class="produto-preco">Por: ${produto.preco}</span>
+                            ${produto.desconto ? `<span class="badge-desconto">${produto.desconto}</span>` : ''}
+                        </div>
+                    `;
                 } else {
-                    produto.style.display = 'none';
+                    precoHTML = `
+                        <div class="produto-preco-container">
+                            <span class="produto-preco">${produto.preco}</span>
+                        </div>
+                    `;
                 }
+
+                card.innerHTML = `
+                    <div class="imagem-container">
+                        <img src="${produto.imagem}" 
+                             alt="${produto.nome}" 
+                             class="produto-imagem"
+                             loading="lazy"
+                             onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect fill=%22%23f0f2f5%22 width=%22100%22 height=%22100%22/%3E%3Ctext x=%2230%22 y=%2250%22 fill=%22%23999%22 font-size=%2210%22 font-family=%22Arial%22%3ESem imagem%3C/text%3E%3C/svg%3E'">
+                    </div>
+                    <div class="produto-info">
+                        <h3 class="produto-titulo">${produto.nome}</h3>
+                        ${precoHTML}
+                        <a href="${produto.link}" target="_blank" class="btn-whatsapp">
+                            <i class="fab fa-whatsapp"></i> Pedir no WhatsApp
+                        </a>
+                    </div>
+                `;
+
+                container.appendChild(card);
             });
         }
+
+        function filtrarProdutos() {
+            const termo = termoBusca.toLowerCase().trim();
+            
+            const filtrados = produtos.filter(produto => {
+                const nomeMatch = produto.nome.toLowerCase().includes(termo);
+                const categoriaMatch = categoriaAtual === 'todos' || produto.categoria === categoriaAtual;
+                return nomeMatch && categoriaMatch;
+            });
+
+            renderizarProdutos(filtrados);
+        }
+
+        // ==========================================
+        // EVENTOS
+        // ==========================================
+
+        inputBusca.addEventListener('input', (e) => {
+            termoBusca = e.target.value;
+            filtrarProdutos();
+        });
+
+        document.querySelector('.categorias').addEventListener('click', (e) => {
+            const btn = e.target.closest('.btn-categoria');
+            if (!btn) return;
+
+            document.querySelectorAll('.btn-categoria').forEach(b => b.classList.remove('ativo'));
+            btn.classList.add('ativo');
+
+            categoriaAtual = btn.dataset.categoria;
+            filtrarProdutos();
+        });
+
+        // ==========================================
+        // INICIALIZAÇÃO
+        // ==========================================
+        renderizarProdutos(produtos);
     </script>
 
 </body>
