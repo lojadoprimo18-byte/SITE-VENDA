@@ -10,456 +10,160 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --navy: #0b3472;
+            --navy-deep: #082653;
+            --blue: #1557b0;
+            --yellow: #ffcf24;
+            --ink: #172337;
+            --muted: #68758a;
+            --surface: #ffffff;
+            --page: #f4f7fb;
+            --line: #e4eaf2;
+            --green: #16a765;
+            --shadow: 0 8px 28px rgba(16, 39, 74, .08);
+            --shadow-hover: 0 16px 36px rgba(16, 39, 74, .14);
         }
-
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: 260px; }
         body {
-            font-family: 'Inter', sans-serif;
-            background: #f0f2f5;
-            min-height: 100vh;
-            padding-top: 0;
+            margin: 0; min-height: 100vh; padding: 0;
+            font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            color: var(--ink); background: var(--page);
+            -webkit-font-smoothing: antialiased;
         }
-
-        /* ============================================
-           CABEÇALHO FIXO - ESTILO LIMPO E MODERNO
-           ============================================ */
+        button, input { font: inherit; }
         .header-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            background: #ffffff;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+            position: sticky; top: 0; z-index: 1000; width: 100%;
+            background: rgba(255,255,255,.96); backdrop-filter: blur(14px);
+            box-shadow: 0 6px 24px rgba(8,38,83,.09);
         }
-
-        /* Banner Superior */
         .banner-topo {
-            width: 100%;
-            height: 190px;
-            background: #0b3472;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
+            width: 100%; height: clamp(105px, 15vw, 190px);
+            background: linear-gradient(120deg, var(--navy-deep), var(--navy));
+            display: flex; align-items: center; justify-content: center; overflow: hidden;
         }
-
-        .banner-topo img {
-            width: 100%;
-            height: 100%;
-            object-fit: fill;
-        }
-
-        /* Conteúdo do Cabeçalho */
+        .banner-topo img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
         .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 15px;
-            background: #ffffff;
+            max-width: 1320px; margin: 0 auto; padding: 14px 28px;
+            display: flex; align-items: center; justify-content: space-between; gap: 24px;
         }
-
-        /* Logo */
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-shrink: 0;
-        }
-
-        .logo-container img {
-            height: 40px;
-            width: auto;
-            object-fit: contain;
-        }
-
-        .logo-texto {
-            display: flex;
-            flex-direction: column;
-            line-height: 1.2;
-        }
-
-        .logo-texto .nome {
-            font-size: 16px;
-            font-weight: 800;
-            color: #0b3472;
-            letter-spacing: -0.5px;
-        }
-
-        .logo-texto .slogan {
-            font-size: 10px;
-            font-weight: 500;
-            color: #666;
-            letter-spacing: 0.3px;
-            text-transform: uppercase;
-        }
-
-        /* Barra de Busca */
-        .busca-wrapper {
-            position: relative;
-            flex: 1;
-            max-width: 450px;
-        }
-
-        .busca-wrapper i {
-            position: absolute;
-            left: 14px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #999;
-            font-size: 14px;
-        }
-
+        .logo-container { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+        .logo-container img { width: 48px; height: 48px; object-fit: contain; }
+        .logo-texto { display: flex; flex-direction: column; gap: 3px; line-height: 1.2; }
+        .logo-texto .nome { font-size: 17px; font-weight: 800; letter-spacing: -.55px; color: var(--navy); }
+        .logo-texto .slogan { font-size: 10px; font-weight: 700; color: var(--muted); letter-spacing: .65px; text-transform: uppercase; }
+        .busca-wrapper { position: relative; flex: 1; max-width: 540px; }
+        .busca-wrapper i { position: absolute; left: 17px; top: 50%; transform: translateY(-50%); color: #8491a5; font-size: 15px; pointer-events: none; }
         .barra-busca {
-            width: 100%;
-            padding: 8px 15px 8px 40px;
-            border: 2px solid #e8ecf0;
-            border-radius: 10px;
-            font-size: 13px;
-            outline: none;
-            background: #f8f9fa;
-            color: #333;
-            transition: all 0.3s ease;
+            width: 100%; padding: 14px 18px 14px 46px; border: 1px solid var(--line);
+            border-radius: 14px; font-size: 14px; outline: none; background: #f7f9fc;
+            color: var(--ink); transition: border-color .2s, box-shadow .2s, background .2s;
         }
-
-        .barra-busca:focus {
-            border-color: #0b3472;
-            background: #ffffff;
-            box-shadow: 0 0 0 4px rgba(11, 52, 114, 0.1);
-        }
-
-        .barra-busca::placeholder {
-            color: #aaa;
-        }
-
-        /* Contato WhatsApp */
+        .barra-busca:focus { border-color: var(--blue); background: white; box-shadow: 0 0 0 4px rgba(21,87,176,.12); }
+        .barra-busca::placeholder { color: #929db0; }
         .contato-whatsapp {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: #25d366;
-            color: #fff;
-            padding: 7px 16px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 13px;
-            transition: all 0.3s ease;
-            flex-shrink: 0;
-            white-space: nowrap;
+            display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+            background: var(--green); color: white; padding: 13px 18px; border-radius: 12px;
+            text-decoration: none; font-weight: 750; font-size: 13px; white-space: nowrap;
+            transition: transform .2s, background .2s, box-shadow .2s;
+            box-shadow: 0 5px 14px rgba(22,167,101,.18);
         }
-
-        .contato-whatsapp:hover {
-            background: #1ebe5a;
-            transform: scale(1.02);
-        }
-
-        .contato-whatsapp i {
-            font-size: 16px;
-        }
-
-        /* ============================================
-           CATEGORIAS (ABAIXO DO CABEÇALHO)
-           ============================================ */
-        .categorias-container {
-            background: #ffffff;
-            border-top: 1px solid #f0f2f5;
-            padding: 6px 20px;
-            overflow-x: auto;
-        }
-
+        .contato-whatsapp:hover { background: #118d55; transform: translateY(-1px); box-shadow: 0 8px 18px rgba(22,167,101,.24); }
+        .contato-whatsapp i { font-size: 17px; }
+        .categorias-container { background: white; border-top: 1px solid #edf1f6; padding: 9px 28px 12px; }
         .categorias {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            gap: 6px;
-            overflow-x: auto;
-            scrollbar-width: none;
-            -webkit-overflow-scrolling: touch;
+            max-width: 1320px; margin: 0 auto; display: flex; gap: 8px;
+            overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch;
         }
-
-        .categorias::-webkit-scrollbar {
-            display: none;
-        }
-
+        .categorias::-webkit-scrollbar { display: none; }
         .btn-categoria {
-            background: transparent;
-            border: none;
-            color: #555;
-            padding: 8px 18px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: 500;
-            font-size: 13px;
-            white-space: nowrap;
-            transition: all 0.2s ease;
-            flex-shrink: 0;
+            border: 1px solid transparent; background: transparent; color: #58667a;
+            padding: 10px 17px; border-radius: 999px; cursor: pointer; font-weight: 650;
+            font-size: 12px; white-space: nowrap; flex-shrink: 0; transition: all .2s;
         }
-
-        .btn-categoria:hover {
-            background: #f0f2f5;
-            color: #0b3472;
-        }
-
-        .btn-categoria.ativo {
-            background: #0b3472;
-            color: #ffffff;
-            font-weight: 600;
-        }
-
-        /* ============================================
-           GRADE DE PRODUTOS
-           ============================================ */
+        .btn-categoria:hover { background: #f0f5fc; color: var(--navy); }
+        .btn-categoria.ativo { color: white; background: var(--navy); box-shadow: 0 4px 10px rgba(11,52,114,.18); }
         .container {
-            max-width: 1200px;
-            margin: 240px auto 50px;
-            padding: 0 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
-            gap: 10px;
+            max-width: 1320px; margin: 0 auto; padding: 30px 28px 56px;
+            display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 18px;
         }
-
         .produto-card {
-            background: #ffffff;
-            border-radius: 10px;
-            padding: 10px;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-            transition: all 0.3s ease;
-            border: 1px solid #f0f2f5;
+            min-width: 0; background: var(--surface); border: 1px solid var(--line);
+            border-radius: 18px; padding: 14px; display: flex; flex-direction: column;
+            box-shadow: 0 3px 12px rgba(16,39,74,.035);
+            transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+            overflow: hidden;
         }
-
-        .produto-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-            border-color: #dce0e5;
-        }
-
+        .produto-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); border-color: #cbd8e9; }
         .imagem-container {
-            width: 100%;
-            height: 180px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #fafbfc;
-            border-radius: 8px;
-            margin-bottom: 12px;
-            overflow: hidden;
+            width: 100%; height: 190px; display: flex; align-items: center; justify-content: center;
+            background: linear-gradient(145deg, #fbfcfe, #f4f7fb); border-radius: 12px;
+            margin-bottom: 15px; overflow: hidden; padding: 12px;
         }
-
-        .produto-imagem {
-            max-width: 100%;
-            max-height: 100%;
-            width: auto;
-            height: auto;
-            object-fit: contain;
-        }
-
-        .produto-info {
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-            gap: 8px;
-        }
-
+        .produto-imagem { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; mix-blend-mode: multiply; transition: transform .3s ease; }
+        .produto-card:hover .produto-imagem { transform: scale(1.045); }
+        .produto-info { display: flex; flex-direction: column; flex-grow: 1; gap: 11px; }
         .produto-titulo {
-            font-size: 14px;
-            font-weight: 600;
-            line-height: 1.4;
-            color: #1a1a2e;
-            min-height: 40px;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
+            font-size: 13px; font-weight: 700; line-height: 1.5; color: #202d41;
+            min-height: 39px; display: -webkit-box; -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical; overflow: hidden;
         }
-
-        .produto-preco-container {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-        }
-
-        .preco-antigo {
-            color: #999;
-            text-decoration: line-through;
-            font-size: 13px;
-        }
-
-        .produto-preco {
-            font-size: 20px;
-            font-weight: 700;
-            color: #16a34a;
-        }
-
-        .produto-preco small {
-            font-size: 13px;
-            font-weight: 400;
-            color: #666;
-        }
-
-        .badge-desconto {
-            background: #dc2626;
-            color: #fff;
-            font-size: 11px;
-            font-weight: 700;
-            padding: 2px 10px;
-            border-radius: 4px;
-            display: inline-block;
-            align-self: flex-start;
-        }
-
+        .produto-preco-container { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; min-height: 42px; }
+        .preco-antigo { color: #8b96a7; text-decoration: line-through; font-size: 12px; }
+        .produto-preco { font-size: 19px; font-weight: 800; color: var(--navy); letter-spacing: -.4px; }
+        .produto-preco small { font-size: 12px; font-weight: 500; color: var(--muted); }
+        .badge-desconto { background: #fff0ed; color: #c53b2d; font-size: 10px; font-weight: 800; padding: 5px 9px; border-radius: 6px; display: inline-block; }
         .btn-whatsapp {
-            background: #25d366;
-            color: #fff;
-            text-decoration: none;
-            text-align: center;
-            padding: 10px 12px;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 13px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            transition: all 0.2s ease;
-            margin-top: auto;
-            border: none;
-            cursor: pointer;
+            width: 100%; background: var(--green); color: #fff; text-decoration: none; text-align: center;
+            padding: 12px 10px; border-radius: 10px; font-weight: 750; font-size: 12px;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            transition: background .2s, transform .2s; margin-top: auto; border: none; cursor: pointer;
         }
-
-        .btn-whatsapp:hover {
-            background: #1ebe5a;
-            transform: scale(1.02);
-        }
-
+        .btn-whatsapp:hover { background: #118d55; transform: translateY(-1px); }
         .mensagem-vazio {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 60px 20px;
-            color: #999;
-            display: none;
+            max-width: 1320px; margin: 0 auto 50px; text-align: center; padding: 60px 20px;
+            color: var(--muted); display: none; background: white; border: 1px solid var(--line);
+            border-radius: 18px;
         }
-
-        .mensagem-vazio i {
-            font-size: 48px;
-            color: #ddd;
-            display: block;
-            margin-bottom: 12px;
+        .mensagem-vazio i { font-size: 42px; color: #b9c4d3; display: block; margin-bottom: 14px; }
+        @media (min-width: 1500px) { .container { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+        @media (max-width: 1120px) { .container { grid-template-columns: repeat(4, minmax(0, 1fr)); } .header-content { gap: 16px; } }
+        @media (max-width: 850px) {
+            html { scroll-padding-top: 240px; }
+            .banner-topo { height: 110px; }
+            .header-content { padding: 12px 18px; gap: 12px; flex-wrap: wrap; }
+            .logo-container img { width: 42px; height: 42px; }
+            .busca-wrapper { order: 3; flex-basis: 100%; max-width: none; }
+            .contato-whatsapp { margin-left: auto; padding: 11px 14px; }
+            .categorias-container { padding: 8px 14px 10px; }
+            .container { grid-template-columns: repeat(3, minmax(0, 1fr)); padding: 22px 18px 40px; gap: 13px; }
+            .imagem-container { height: 155px; }
         }
-
-        /* ============================================
-           RESPONSIVIDADE
-           ============================================ */
-        @media (max-width: 1024px) {
-            .container {
-                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            }
+        @media (max-width: 560px) {
+            html { scroll-padding-top: 225px; }
+            .banner-topo { height: 78px; }
+            .header-content { padding: 10px 13px; gap: 10px; }
+            .logo-container { gap: 8px; }
+            .logo-container img { width: 36px; height: 36px; }
+            .logo-texto .nome { font-size: 14px; }
+            .logo-texto .slogan { font-size: 8px; letter-spacing: .35px; }
+            .contato-whatsapp { padding: 10px 11px; font-size: 0; gap: 0; border-radius: 11px; }
+            .contato-whatsapp i { font-size: 19px; }
+            .barra-busca { padding: 12px 14px 12px 42px; font-size: 13px; }
+            .btn-categoria { padding: 9px 14px; font-size: 11px; }
+            .container { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 16px 12px 32px; gap: 10px; }
+            .produto-card { padding: 10px; border-radius: 14px; }
+            .imagem-container { height: 128px; margin-bottom: 11px; padding: 8px; }
+            .produto-info { gap: 9px; }
+            .produto-titulo { font-size: 12px; min-height: 36px; }
+            .produto-preco { font-size: 16px; }
+            .preco-antigo { font-size: 11px; }
+            .badge-desconto { font-size: 9px; }
+            .btn-whatsapp { font-size: 10px; padding: 10px 6px; gap: 5px; }
         }
-
-        @media (max-width: 768px) {
-            .header-content {
-                flex-wrap: wrap;
-                padding: 10px 16px;
-                gap: 10px;
-            }
-
-            .logo-container img {
-                height: 35px;
-            }
-
-            .logo-texto .nome {
-                font-size: 15px;
-            }
-
-            .logo-texto .slogan {
-                font-size: 10px;
-            }
-
-            .busca-wrapper {
-                order: 3;
-                flex-basis: 100%;
-                max-width: 100%;
-            }
-
-            .contato-whatsapp {
-                padding: 6px 14px;
-                font-size: 12px;
-            }
-
-            .contato-whatsapp i {
-                font-size: 15px;
-            }
-
-            .banner-topo {
-                height: 80px;
-            }
-
-            .container {
-                margin-top: 170px;
-                padding: 0 12px;
-                gap: 12px;
-                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-            }
-
-            .categorias-container {
-                padding: 6px 12px;
-            }
-
-            .btn-categoria {
-                font-size: 12px;
-                padding: 6px 14px;
-            }
-
-            .imagem-container {
-                height: 140px;
-            }
-
-            .produto-titulo {
-                font-size: 13px;
-                min-height: 34px;
-            }
-
-            .produto-preco {
-                font-size: 17px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-                gap: 10px;
-                margin-top: 160px;
-            }
-
-            .produto-card {
-                padding: 12px;
-            }
-
-            .imagem-container {
-                height: 120px;
-            }
-
-            .produto-titulo {
-                font-size: 12px;
-                min-height: 30px;
-            }
-
-            .produto-preco {
-                font-size: 15px;
-            }
-
-            .btn-whatsapp {
-                font-size: 11px;
-                padding: 8px 10px;
-            }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
         }
     </style>
 </head>
@@ -468,7 +172,7 @@
     <!-- ==========================================
     CABEÇALHO FIXO
     ========================================== -->
-    <div class="header-container">
+    <header class="header-container">
         
         <!-- Banner Superior -->
         <div class="banner-topo">
@@ -494,11 +198,11 @@
             <!-- Busca -->
             <div class="busca-wrapper">
                 <i class="fas fa-search"></i>
-                <input type="text" id="busca" class="barra-busca" placeholder="Pesquisar produto...">
+                <input type="search" id="busca" class="barra-busca" placeholder="Buscar por produto..." aria-label="Buscar produtos" autocomplete="off">
             </div>
 
             <!-- WhatsApp -->
-            <a href="https://wa.me/5531972054164" target="_blank" class="contato-whatsapp">
+            <a href="https://wa.me/5531972054164" target="_blank" rel="noopener noreferrer" class="contato-whatsapp">
                 <i class="fab fa-whatsapp"></i>
                 <span>(31) 97205-4164</span>
             </a>
@@ -507,7 +211,7 @@
 
         <!-- Categorias -->
         <div class="categorias-container">
-            <div class="categorias">
+            <nav class="categorias" aria-label="Filtrar por categoria">
                 <button class="btn-categoria ativo" data-categoria="todos">Todos</button>
                 <button class="btn-categoria" data-categoria="parafusos">Parafusos</button>
                 <button class="btn-categoria" data-categoria="automotivo">Automotivo</button>
@@ -516,18 +220,18 @@
                 <button class="btn-categoria" data-categoria="tintas">Tintas</button>
                 <button class="btn-categoria" data-categoria="iluminação">Iluminação</button>
                 <button class="btn-categoria" data-categoria="cola">Cola</button>
-            </div>
+            </nav>
         </div>
-    </div>
+    </header>
 
     <!-- ==========================================
     GRADE DE PRODUTOS
     ========================================== -->
-    <div class="container" id="lista-produtos"></div>
-    <div class="mensagem-vazio" id="mensagem-vazio">
+    <main class="container" id="lista-produtos" aria-label="Catálogo de produtos"></main>
+    <section class="mensagem-vazio" id="mensagem-vazio" role="status" aria-live="polite">
         <i class="fas fa-box-open"></i>
         <p>Nenhum produto encontrado para esta busca.</p>
-    </div>
+    </section>
 
     <script>
         // ==========================================
@@ -559,7 +263,7 @@
                 id: 3,
                 nome: 'Parafuso Sextavado 8.8',
                 categoria: 'parafusos',
-                imagem: 'https://i.postimg.cc/gcQK67Cc/images.jpg',
+                imagem: 'https://b2b.dismatal.com.br/Content/Arquivos/Produto/1000/1110467_principal.jpg',
                 preco: 'A partir R$ 0,50',
                 precoAntigo: null,
                 desconto: null,
@@ -569,7 +273,7 @@
                 id: 4,
                 nome: 'Parafuso Sextavado Interno',
                 categoria: 'parafusos',
-                imagem: 'https://i.postimg.cc/fTQ9sh4R/Parafuso-Sextavado-Interno.webp',
+                imagem: 'https://storage.googleapis.com/fotos-prd/Parafuso%20CCMMLG/1587565664812PARAFUSO_CC_MM_LG_1.jpg',
                 preco: 'A partir R$ 0,60',
                 precoAntigo: null,
                 desconto: null,
@@ -611,7 +315,7 @@
                 id: 8,
                 nome: 'Jogo de Macho VONDER',
                 categoria: 'ferramentas',
-                imagem: 'https://i.postimg.cc/bYxvQDM8/513014-jogo-de-macho-manual-aco-rapido-3-4-unc-com-2-pecas.jpg',
+                imagem: '	https://b2b.dismatal.com.br/Content/Arquivos/Produto/1000/1092277_principal.jpg',
                 preco: 'A partir R$ 49,90',
                 precoAntigo: null,
                 desconto: null,
@@ -621,7 +325,7 @@
                 id: 9,
                 nome: 'Broca Chata para Dobradiça 26mm VONDER',
                 categoria: 'ferramentas',
-                imagem: 'https://www.dismatal.com.br/estatico/dismatal/temp/330_5304026000.jpg',
+                imagem: '	https://b2b.dismatal.com.br/Content/Arquivos/Produto/1000/1092466_embalagem_1.jpg',
                 preco: 'R$ 25,90',
                 precoAntigo: null,
                 desconto: null,
@@ -631,7 +335,7 @@
                 id: 10,
                 nome: 'Broca Chata para Dobradiça 35mm VONDER',
                 categoria: 'ferramentas',
-                imagem: 'https://www.dismatal.com.br/estatico/dismatal/temp/330_5304035000.jpg',
+                imagem: '	https://b2b.dismatal.com.br/Content/Arquivos/Produto/1000/1092467_embalagem_2.jpg',
                 preco: 'R$ 25,90',
                 precoAntigo: null,
                 desconto: null,
@@ -842,8 +546,8 @@
                 categoria: 'tintas',
                 imagem: 'https://b2b.dismatal.com.br/Content/Arquivos/Produto/1000/1101540_principal.jpg',
                 preco: 'R$ 19,90',
-                precoAntigo: 21,90,
-                desconto: 10%,
+                precoAntigo: 'R$ 21,90',
+                desconto: '10% OFF',
                 link: 'https://wa.link/9mp8z2'
             },
             // Rolamentos
@@ -920,7 +624,7 @@
                     <div class="produto-info">
                         <h3 class="produto-titulo">${produto.nome}</h3>
                         ${precoHTML}
-                        <a href="${produto.link}" target="_blank" class="btn-whatsapp">
+                        <a href="${produto.link}" target="_blank" rel="noopener noreferrer" class="btn-whatsapp">
                             <i class="fab fa-whatsapp"></i> Pedir no WhatsApp
                         </a>
                     </div>
